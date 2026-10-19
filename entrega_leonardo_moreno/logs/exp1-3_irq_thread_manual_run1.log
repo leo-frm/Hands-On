@@ -1,0 +1,2121 @@
+# ORIGEM: execucao EMULADA - firmware real (west build, esp32_devkitc) rodando no
+#         QEMU da Espressif com modelo de GPIO estendido; NAO e medicao em placa fisica.
+# Experimento: exp1-3_irq_thread_manual | execucao 1
+# Configuracao: -DCONFIG_APP_MODE_IRQ_THREAD=y -DCONFIG_APP_STIMULUS=n -DCONFIG_APP_VERBOSE=y
+# Emulador: -icount shift=2 (4 ns/instrucao) | GPIO: btn-count=25, btn-short-every=5, btn-short-ms=4
+
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x12 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3ffb0000,len:7092
+load:0x40080000,len:35360
+ho 0 tail 12 room 4
+load:0x50000000,len:40
+entry 0x40083da4
+I (soc_init): ESP Simple boot
+I (soc_init): compile time Oct 19 2026 13:27:00
+W (soc_init): Unicore bootloader
+I (soc_init): chip revision: v0.0
+E (soc_init): You are using ESP32 chip revision (0) that is unsupported. While it may work, it could cause unexpected behavior or issues.
+E (soc_init): Proceeding with this ESP32 chip revision is not recommended unless you fully understand the potential risk and limitations.
+I (flash_init): SPI Speed      : 40MHz
+I (flash_init): SPI Mode       : DIO
+I (flash_init): SPI Flash Size : 4MB
+I (boot): DRAM	: lma=00001020h vma=3ffb0000h size=01bb4h (  7092)
+I (boot): IRAM	: lma=00002bdch vma=40080000h size=08a20h ( 35360)
+I (boot): RTC_DATA	: lma=0000b604h vma=50000000h size=00028h (    40)
+I (boot): IROM	: lma=00010000h vma=400d0000h size=03770h ( 14192)
+I (boot): DROM	: lma=00020000h vma=3f400000h size=10000h ( 65536)
+I (boot): libc heap size 179 kB.
+I (spi_flash): detected chip: gd
+I (spi_flash): flash io: dio
+*** Booting Zephyr OS build 03b1ebca3343 ***
+
+*** Hands-on eventos | modo: irq_thread ***
+hw cycles/s = 240000000  | tick = 1000 Hz
+evento processado #1
+evento processado #2
+evento processado #3
+evento processado #4
+evento processado #5
+evento processado #6
+evento processado #7
+evento processado #8
+[status] eventos processados = 8
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 20957
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 2399989783
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 67283
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+evento processado #9
+evento processado #10
+evento processado #11
+evento processado #12
+evento processado #13
+evento processado #14
+evento processado #15
+evento processado #16
+evento processado #17
+[status] eventos processados = 17
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 44525
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 4800114778
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 151942
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+evento processado #18
+evento processado #19
+evento processado #20
+evento processado #21
+evento processado #22
+evento processado #23
+evento processado #24
+evento processado #25
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 7200242707
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 236707
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 9600397041
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 321462
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 12000551368
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 406344
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 14400705587
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 491208
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 16800859806
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 576081
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 19201014022
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 660979
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 21601168225
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 745860
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 24001322435
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 830741
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 26401476635
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 915613
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 28801630855
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 1000486
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 31201784948
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 1085483
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 33601939051
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 1170481
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 36002093134
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 1255485
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 38402247246
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 1340440
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 40802401365
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 1425437
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 43202555467
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 1510400
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 45602709569
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 1595406
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 48002863678
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 1680386
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 50403017790
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 1765393
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 52803171881
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 1850372
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 55203325985
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 1935345
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 57603480111
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 2020334
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 60003634186
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 2105359
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 62403788260
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 2190349
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 64803942360
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 2275348
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 67204096470
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 2360322
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 69604250577
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 2445302
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 72004404680
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 2530301
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 74404558762
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 2615290
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 76804712873
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 2700272
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 79204866981
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 2785254
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 81605021108
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 2870261
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 84005175174
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 2955261
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 86405329275
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 3040224
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 88805483395
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 3125195
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 91205637513
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 3210183
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 93605791607
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 3295180
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 96005945708
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 3380168
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 98406099812
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 3465157
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 100806253922
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 3550279
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 103206407891
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 3635383
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 105606561886
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 3720471
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 108006715871
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 3805593
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 110406869848
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 3890690
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 112807023832
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 3975804
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 115207177818
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 4060910
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 117607331776
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 4146034
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 120007485762
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 4231149
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 122407639736
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 4316246
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 124807793738
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 4401325
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 127207947742
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 4486422
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 129608101752
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 4571520
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 132008255729
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 4656617
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 134408409731
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 4741715
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 136808563716
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 4826814
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 139208717718
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 4911910
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 141608871687
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 4997033
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 144009025672
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 5082148
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 146409179647
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 5167246
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 148809333650
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 5252334
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 151209487651
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 5337432
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 153609641653
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 5422514
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 156009795653
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 5507603
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 158409949647
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 5592691
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 160810103657
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 5677814
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 163210257625
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 5762913
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 165610411618
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 5848029
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 168010565592
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 5933129
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 170410719584
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 6018237
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 172810873557
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 6103334
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 175211027543
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 6188464
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 177611181519
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 6273580
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 180011335496
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 6358686
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 182411489488
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 6443765
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 184811643500
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 6528869
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 187211797486
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 6613949
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 189611951488
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 6699044
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 192012105485
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 6784148
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 194412259471
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 6869244
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 196812413466
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 6954333
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 199212567468
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 7039412
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 201612721473
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 7124526
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 204012875458
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 7209624
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 206413029450
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 7294728
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 208813183446
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 7379824
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 211213337440
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 7464920
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 213613491427
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 7550025
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 216013645405
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 7635140
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 218413799382
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 7720245
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 220813953366
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 7805344
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 223214107359
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 7890451
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 225614261343
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 7975566
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 228014415336
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 8060662
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 230414569314
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 8145768
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 232814723307
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 8230857
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 235214877310
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 8315954
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 237615031303
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 8401078
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 240015185255
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 8486202
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 242415339229
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 8571307
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 244815493214
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 8656405
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 247215647216
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 8741494
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 249615801217
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 8826600
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 252015955194
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 8911705
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 254416109169
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 8996829
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 256816263154
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 9081927
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 259216417137
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 9167032
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 261616571124
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 9252146
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 264016725109
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 9337252
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 266416879093
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 9422348
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 268817033096
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 9507438
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 271217187087
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 9592546
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 273617341080
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 9677644
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 276017495071
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 9762740
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 278417649058
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 9847828
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 280817803069
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 9932935
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 283217957055
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 10018014
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 285618110906
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 10103279
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 288018264748
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 10188502
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 290418418619
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 10273741
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 292818572477
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 10358945
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 295218726374
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 10444148
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 297618880251
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 10529379
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 300019034121
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 10614635
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 302419187946
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 10699858
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 304819341823
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 10785089
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 307219495675
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 10870303
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 309619649533
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 10955541
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 312019803404
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 11040780
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 314419957237
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 11126028
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 316820111089
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 11211285
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 319220264921
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 11296534
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 321620418781
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 11381756
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 324020572642
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 11466988
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 326420726509
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 11552194
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 328820880386
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 11637418
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 331221034253
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 11722657
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 333621188113
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 11807891
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 336021341952
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 11893122
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 338421495821
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 11978346
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 340821649687
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 12063562
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 343221803572
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 12148795
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 345621957430
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 12234007
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 348022111300
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 12319262
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 350422265144
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 12404476
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 352822419020
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 12489707
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 355222572882
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 12574903
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 357622726776
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 12660090
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 360022880663
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 12745321
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 362423034538
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 12830533
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 364823188417
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 12915737
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 367223342303
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 13000958
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 369623496154
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 13086170
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 372023650035
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 13171416
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 374423803878
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 13256638
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 376823957774
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 13341826
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 379224111667
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 13427038
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 381624265548
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 13512242
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 384024419416
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 13597473
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 386424573302
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 13682678
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 388824727188
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 13767865
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 391224881090
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 13853088
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 393625034951
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 13938294
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 396025188837
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 14023506
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 398425342708
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 14108719
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 400825496576
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 14193950
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 403225650445
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 14279164
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 405625804329
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 14364378
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 408025958215
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 14449593
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 410426112092
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 14534833
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 412826265933
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 14620046
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 415226419803
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 14705277
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 417626573671
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 14790491
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 420026727540
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 14875722
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 422426881415
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 14960918
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 424827035293
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 15046140
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 427227189151
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 15131381
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 429627343002
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 15216621
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 432027496853
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 15301844
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 434427650729
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 15387049
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 436827804624
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 15472263
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 439227958491
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 15557476
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 441628112387
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 15642699
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 444028266254
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 15727897
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 446428420148
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 15813111
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 448828573988
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 15898334
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 451228727881
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 15983540
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 453628881767
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 16068736
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 456029035660
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 16153959
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 458429189529
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 16239172
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 460829343405
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 16324377
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 463229497291
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 16409583
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 465629651177
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 16494795
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 468029805064
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 16580009
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 470429958915
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 16665230
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 472830112800
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 16750462
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 475230266652
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 16835676
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 477630420545
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 16920880
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 480030574415
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 17006111
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 482430728248
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 17091349
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 484830882129
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 17176572
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 487231036006
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 17261812
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 489631189848
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 17347027
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 492031343733
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 17432232
+ ISR0                : STACK: unused 1680 usage  368 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 25
+Thread analyze:
+ worker              : STACK: unused  464 usage  560 / 1024 ( 54 %); CPU:   0 %
+                     : Total CPU cycles used: 65578
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 494431497617
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 17517448

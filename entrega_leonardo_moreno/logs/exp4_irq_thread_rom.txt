@@ -1,0 +1,734 @@
+-- west build: running target rom_report
+[0/1] cd /home/user/work/builds/exp4_irq_thread && /home/user/zephyrproject/.venv/bin/python3 /home/user/zephyrproject/zephyr/scripts/footprint/size_report -k /home/user/work/builds/exp4_irq_thread/zephyr/zephyr.elf -z /home/user/zephyrproject/zephyr -o /home/user/work/builds/exp4_irq_thread --workspace=/home/user/zephyrproject -d 99 --json rom.json rom
+Path                                                                                             Size       %  Address    Section    
+==========================================================================================================================================
+Root                                                                                            56224 100.00%  - 
+├── (hidden)                                                                                     8012  14.25%  - 
+├── (no paths)                                                                                   2320   4.13%  - 
+│   ├── CSWTCH$16                                                                                  56   0.10%  0x3f400738 .flash.rodata
+│   ├── CSWTCH$4                                                                                   56   0.10%  0x3ffb1758 .loader.data
+│   ├── CSWTCH$59                                                                                   6   0.01%  0x3f400f37 .flash.rodata
+│   ├── CSWTCH$6                                                                                   48   0.09%  0x3ffb1728 .loader.data
+│   ├── CSWTCH$67                                                                                   6   0.01%  0x3ffb1668 .loader.data
+│   ├── __FUNCTION__$0                                                                             28   0.05%  0x3ffb1a61 .loader.data
+│   ├── __file_str_put                                                                             22   0.04%  0x400d3c68 .text
+│   ├── __l_vfprintf                                                                             1400   2.49%  0x400d30bc .text
+│   ├── __ultoa_invert                                                                            232   0.41%  0x400d3b80 .text
+│   ├── fprintf                                                                                    41   0.07%  0x400d3034 .text
+│   ├── snprintf                                                                                   90   0.16%  0x400d3060 .text
+│   ├── spi_flash_hal_supports_direct_read                                                         18   0.03%  0x40088950 .loader.text
+│   ├── spi_flash_hal_suspend                                                                       9   0.02%  0x4008647c .iram0.text
+│   ├── xthal_window_spill                                                                         35   0.06%  0x400839b8 .iram0.text
+│   └── xthal_window_spill_nw                                                                     273   0.49%  0x400838a4 .iram0.text
+├── /                                                                                            2079   3.70%  - 
+│   └── home                                                                                     2079   3.70%  - 
+│       └── user                                                                                 2079   3.70%  - 
+│           ├── Hands-On                                                                         2059   3.66%  - 
+│           │   └── entrega_leonardo_moreno                                                      2059   3.66%  - 
+│           │       └── codigo                                                                   2059   3.66%  - 
+│           │           └── 00_bench_eventos                                                     2059   3.66%  - 
+│           │               └── src                                                              2059   3.66%  - 
+│           │                   ├── bench.c                                                       700   1.25%  - 
+│           │                   │   ├── app_process_event                                          94   0.17%  0x400d096c .text
+│           │                   │   ├── bench_reset_all                                           122   0.22%  0x400d074c .text
+│           │                   │   ├── heartbeat_start                                             5   0.01%  0x400d36a4 .text
+│           │                   │   ├── lat_add                                                    42   0.07%  0x400d3678 .text
+│           │                   │   ├── lat_print                                                 418   0.74%  0x400d07c8 .text
+│           │                   │   └── lat_reset                                                  19   0.03%  0x400d3664 .text
+│           │                   ├── main.c                                                       1007   1.79%  - 
+│           │                   │   ├── button                                                      8   0.01%  0x3f400008 .flash.rodata
+│           │                   │   ├── led                                                         8   0.01%  0x3f400010 .flash.rodata
+│           │                   │   ├── main                                                      893   1.59%  0x400d03cc .text
+│           │                   │   ├── pulse                                                      90   0.16%  0x400d0370 .text
+│           │                   │   └── stim                                                        8   0.01%  0x3f400000 .flash.rodata
+│           │                   └── mode_irq_thread.c                                             352   0.63%  - 
+│           │                       ├── button_isr                                                 87   0.15%  0x400d09cc .text
+│           │                       ├── mode_name                                                   8   0.01%  0x400d0a80 .text
+│           │                       ├── mode_start                                                168   0.30%  0x400d0a88 .text
+│           │                       └── worker                                                     89   0.16%  0x400d0a24 .text
+│           └── zephyr-sdk-1.0.1                                                                   20   0.04%  - 
+│               └── gnu                                                                            20   0.04%  - 
+│                   └── xtensa-espressif_esp32_zephyr-elf                                          20   0.04%  - 
+│                       └── xtensa-espressif_esp32_zephyr-elf                                      20   0.04%  - 
+│                           └── sys-include                                                        20   0.04%  - 
+│                               └── stdlib.h                                                       20   0.04%  - 
+│                                   └── abort                                                      20   0.04%  0x400d1dcc .text
+├── OUTPUT_DIR                                                                                     20   0.04%  - 
+│   └── zephyr                                                                                     20   0.04%  - 
+│       ├── include                                                                                15   0.03%  - 
+│       │   └── generated                                                                          15   0.03%  - 
+│       │       └── zephyr                                                                         15   0.03%  - 
+│       │           └── syscalls                                                                   15   0.03%  - 
+│       │               └── sleep.h                                                                15   0.03%  - 
+│       │                   └── k_sleep_ticks$isra$0                                               15   0.03%  0x400d0360 .text
+│       └── misc                                                                                    5   0.01%  - 
+│           └── generated                                                                           5   0.01%  - 
+│               └── configs.c                                                                       5   0.01%  - 
+│                   └── _ConfigAbsSyms                                                              5   0.01%  0x400d3720 .text
+├── WORKSPACE                                                                                   26722  47.53%  - 
+│   └── modules                                                                                 26722  47.53%  - 
+│       └── hal                                                                                 26722  47.53%  - 
+│           └── espressif                                                                       26722  47.53%  - 
+│               ├── components                                                                  22360  39.77%  - 
+│               │   ├── bootloader_support                                                        140   0.25%  - 
+│               │   │   ├── bootloader_flash                                                      110   0.20%  - 
+│               │   │   │   └── src                                                               110   0.20%  - 
+│               │   │   │       └── bootloader_flash_config_esp32.c                               110   0.20%  - 
+│               │   │   │           └── bootloader_flash_cs_timing_config                         110   0.20%  0x40080bdc .iram0.text
+│               │   │   └── src                                                                    30   0.05%  - 
+│               │   │       └── bootloader_efuse.c                                                 30   0.05%  - 
+│               │   │           └── bootloader_common_get_chip_ver_pkg                             30   0.05%  0x40080c4c .iram0.text
+│               │   ├── esp_driver_gpio                                                           553   0.98%  - 
+│               │   │   └── src                                                                   553   0.98%  - 
+│               │   │       └── rtc_io.c                                                          553   0.98%  - 
+│               │   │           ├── rtc_gpio_is_valid_gpio                                         30   0.05%  0x400849fc .iram0.text
+│               │   │           ├── rtc_gpio_pulldown_dis                                         132   0.23%  0x40084bac .iram0.text
+│               │   │           ├── rtc_gpio_pulldown_en                                          129   0.23%  0x40084b28 .iram0.text
+│               │   │           ├── rtc_gpio_pullup_dis                                           133   0.24%  0x40084aa0 .iram0.text
+│               │   │           └── rtc_gpio_pullup_en                                            129   0.23%  0x40084a1c .iram0.text
+│               │   ├── esp_hal_clock                                                             678   1.21%  - 
+│               │   │   └── esp32                                                                 678   1.21%  - 
+│               │   │       ├── clk_tree_hal.c                                                    490   0.87%  - 
+│               │   │       │   ├── clk_hal_apb_get_freq_hz                                        54   0.10%  0x400d1508 .text
+│               │   │       │   ├── clk_hal_apll_get_freq_hz                                      144   0.26%  0x400d1398 .text
+│               │   │       │   ├── clk_hal_cpu_get_freq_hz                                       146   0.26%  0x400d1474 .text
+│               │   │       │   ├── clk_hal_lp_slow_get_freq_hz                                    36   0.06%  0x400d1350 .text
+│               │   │       │   ├── clk_hal_soc_root_get_freq_mhz                                  74   0.13%  0x400d1428 .text
+│               │   │       │   └── clk_hal_xtal_get_freq_mhz                                      36   0.06%  0x400d1374 .text
+│               │   │       └── include                                                           188   0.33%  - 
+│               │   │           └── hal                                                           188   0.33%  - 
+│               │   │               └── clk_gate_ll.h                                             188   0.33%  - 
+│               │   │                   ├── periph_ll_disable_clk_set_rst                          94   0.17%  0x40087cd0 .iram0.text
+│               │   │                   └── periph_ll_enable_clk_clear_rst                         94   0.17%  0x40087d30 .iram0.text
+│               │   ├── esp_hal_gpio                                                             1064   1.89%  - 
+│               │   │   └── esp32                                                                1064   1.89%  - 
+│               │   │       ├── include                                                            56   0.10%  - 
+│               │   │       │   └── hal                                                            56   0.10%  - 
+│               │   │       │       └── rtc_io_ll.h                                                56   0.10%  - 
+│               │   │       │           └── rtcio_ll_set_drive_capability                          56   0.10%  0x400d26d4 .text
+│               │   │       └── rtc_io_periph.c                                                  1008   1.79%  - 
+│               │   │           └── rtc_io_desc                                                  1008   1.79%  0x3f400018 .flash.rodata
+│               │   ├── esp_hal_mspi                                                             2479   4.41%  - 
+│               │   │   ├── spi_flash_encrypt_hal_iram.c                                          127   0.23%  - 
+│               │   │   │   ├── spi_flash_encryption_hal_check                                     14   0.02%  0x400866fc .iram0.text
+│               │   │   │   ├── spi_flash_encryption_hal_destroy                                    5   0.01%  0x400866f4 .iram0.text
+│               │   │   │   ├── spi_flash_encryption_hal_disable                                   24   0.04%  0x400866a0 .iram0.text
+│               │   │   │   ├── spi_flash_encryption_hal_done                                      16   0.03%  0x400866e4 .iram0.text
+│               │   │   │   ├── spi_flash_encryption_hal_enable                                    24   0.04%  0x40086688 .iram0.text
+│               │   │   │   └── spi_flash_encryption_hal_prepare                                   44   0.08%  0x400866b8 .iram0.text
+│               │   │   ├── spi_flash_hal.c                                                       335   0.60%  - 
+│               │   │   │   ├── spi_flash_hal_init                                                317   0.56%  0x400887fc .loader.text
+│               │   │   │   └── spi_flash_hal_supports_direct_write                                18   0.03%  0x4008893c .loader.text
+│               │   │   ├── spi_flash_hal_common.inc                                             1518   2.70%  - 
+│               │   │   │   ├── spi_flash_hal_common_command                                      478   0.85%  0x400860ac .iram0.text
+│               │   │   │   ├── spi_flash_hal_configure_host_io_mode                              544   0.97%  0x40085e8c .iram0.text
+│               │   │   │   ├── spi_flash_hal_device_config                                       219   0.39%  0x40086498 .iram0.text
+│               │   │   │   ├── spi_flash_hal_poll_cmd_done                                        15   0.03%  0x40086488 .iram0.text
+│               │   │   │   └── spi_flash_hal_read                                                262   0.47%  0x4008628c .iram0.text
+│               │   │   └── spi_flash_hal_iram.c                                                  499   0.89%  - 
+│               │   │       ├── spi_flash_hal_check_status                                         47   0.08%  0x40086440 .iram0.text
+│               │   │       ├── spi_flash_hal_erase_block                                          88   0.16%  0x400865f8 .iram0.text
+│               │   │       ├── spi_flash_hal_erase_chip                                           35   0.06%  0x40086574 .iram0.text
+│               │   │       ├── spi_flash_hal_erase_sector                                         95   0.17%  0x40086598 .iram0.text
+│               │   │       ├── spi_flash_hal_program_page                                        170   0.30%  0x40086394 .iram0.text
+│               │   │       ├── spi_flash_hal_resume                                                9   0.02%  0x40086470 .iram0.text
+│               │   │       ├── spi_flash_hal_set_write_protect                                    48   0.09%  0x40086650 .iram0.text
+│               │   │       └── spi_flash_hal_setup_read_suspend                                    7   0.01%  0x40086680 .iram0.text
+│               │   ├── esp_hal_uart                                                             1751   3.11%  - 
+│               │   │   ├── uart_hal.c                                                           1349   2.40%  - 
+│               │   │   │   ├── uart_hal_get_baudrate                                              50   0.09%  0x400d3748 .text
+│               │   │   │   ├── uart_hal_get_data_bit_num                                          17   0.03%  0x400d3818 .text
+│               │   │   │   ├── uart_hal_get_hw_flow_ctrl                                          36   0.06%  0x400d3884 .text
+│               │   │   │   ├── uart_hal_get_parity                                                32   0.06%  0x400d3864 .text
+│               │   │   │   ├── uart_hal_get_sclk                                                  21   0.04%  0x400d3730 .text
+│               │   │   │   ├── uart_hal_get_stop_bits                                             40   0.07%  0x400d37d0 .text
+│               │   │   │   ├── uart_hal_get_symb_len                                              91   0.16%  0x400d38ec .text
+│               │   │   │   ├── uart_hal_inverse_signal                                           231   0.41%  0x400d1200 .text
+│               │   │   │   ├── uart_hal_set_data_bit_num                                          31   0.06%  0x400d37f8 .text
+│               │   │   │   ├── uart_hal_set_hw_flow_ctrl                                          97   0.17%  0x400d1008 .text
+│               │   │   │   ├── uart_hal_set_mode                                                 403   0.72%  0x400d106c .text
+│               │   │   │   ├── uart_hal_set_parity                                                53   0.09%  0x400d382c .text
+│               │   │   │   ├── uart_hal_set_rx_timeout                                           102   0.18%  0x400d12e8 .text
+│               │   │   │   ├── uart_hal_set_rxfifo_full_thr                                       29   0.05%  0x400d38a8 .text
+│               │   │   │   ├── uart_hal_set_stop_bits                                             82   0.15%  0x400d377c .text
+│               │   │   │   └── uart_hal_set_txfifo_empty_thr                                      34   0.06%  0x400d38c8 .text
+│               │   │   └── uart_hal_iram.c                                                       402   0.71%  - 
+│               │   │       ├── uart_hal_read_rxfifo                                              179   0.32%  0x40087c10 .iram0.text
+│               │   │       ├── uart_hal_rxfifo_rst                                                86   0.15%  0x40087b5c .iram0.text
+│               │   │       ├── uart_hal_txfifo_rst                                                47   0.08%  0x40087b2c .iram0.text
+│               │   │       └── uart_hal_write_txfifo                                              90   0.16%  0x40087bb4 .iram0.text
+│               │   ├── esp_hal_wdt                                                               173   0.31%  - 
+│               │   │   └── wdt_hal_iram.c                                                        173   0.31%  - 
+│               │   │       ├── wdt_hal_disable                                                    48   0.09%  0x40085e18 .iram0.text
+│               │   │       ├── wdt_hal_set_flashboot_en                                           68   0.12%  0x40085e48 .iram0.text
+│               │   │       ├── wdt_hal_write_protect_disable                                      29   0.05%  0x40085ddc .iram0.text
+│               │   │       └── wdt_hal_write_protect_enable                                       28   0.05%  0x40085dfc .iram0.text
+│               │   ├── esp_hw_support                                                           7382  13.13%  - 
+│               │   │   ├── esp_clk.c                                                              38   0.07%  - 
+│               │   │   │   ├── esp_clk_apb_freq                                                   25   0.04%  0x40080c6c .iram0.text
+│               │   │   │   └── esp_clk_slowclk_cal_set                                            13   0.02%  0x400d1540 .text
+│               │   │   ├── esp_memory_utils.c                                                     69   0.12%  - 
+│               │   │   │   └── esp_ptr_executable                                                 69   0.12%  0x40087ae4 .iram0.text
+│               │   │   ├── periph_ctrl.c                                                        1324   2.35%  - 
+│               │   │   │   ├── non_shared_periph_module_disable                                  280   0.50%  0x40088160 .iram0.text
+│               │   │   │   ├── non_shared_periph_module_enable                                   736   1.31%  0x40087e80 .iram0.text
+│               │   │   │   ├── periph_module_disable                                              56   0.10%  0x40087df4 .iram0.text
+│               │   │   │   ├── periph_module_enable                                               54   0.10%  0x40087dbc .iram0.text
+│               │   │   │   ├── periph_module_reset                                                84   0.15%  0x40087e2c .iram0.text
+│               │   │   │   ├── periph_rcc_acquire_enter                                           19   0.03%  0x40087d90 .iram0.text
+│               │   │   │   ├── periph_rcc_acquire_exit                                            22   0.04%  0x40087da4 .iram0.text
+│               │   │   │   ├── periph_rcc_enter                                                   27   0.05%  0x40080c88 .iram0.text
+│               │   │   │   └── periph_rcc_exit                                                    46   0.08%  0x40080ca4 .iram0.text
+│               │   │   ├── port                                                                 5451   9.70%  - 
+│               │   │   │   ├── esp32                                                            5144   9.15%  - 
+│               │   │   │   │   ├── esp_clk_tree.c                                                225   0.40%  - 
+│               │   │   │   │   │   └── esp_clk_tree_src_get_freq_hz                              225   0.40%  0x400d1550 .text
+│               │   │   │   │   ├── esp_cpu_intr.c                                                554   0.99%  - 
+│               │   │   │   │   │   ├── esp_cpu_intr_get_desc                                      42   0.07%  0x400d1634 .text
+│               │   │   │   │   │   └── intr_desc_table                                           512   0.91%  0x3f400408 .flash.rodata
+│               │   │   │   │   ├── rtc_clk.c                                                    2347   4.17%  - 
+│               │   │   │   │   │   ├── rtc_clk_32k_enable                                         57   0.10%  0x40084cf8 .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_32k_enable_common                                 137   0.24%  0x40084c30 .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_32k_enable_external                                14   0.02%  0x40084d34 .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_8m_enable                                         130   0.23%  0x40084d44 .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_apb_freq_get                                       45   0.08%  0x4008541c .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_apb_freq_update                                    25   0.04%  0x40080d2c .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_bbpll_disable                                      60   0.11%  0x40084cbc .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_cpu_freq_get_config                               140   0.25%  0x40084f20 .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_cpu_freq_mhz_to_config                             91   0.16%  0x40084ec4 .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_cpu_freq_set_config                               764   1.36%  0x40085120 .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_cpu_freq_to_pll_mhz                               332   0.59%  0x40084fd4 .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_cpu_freq_to_xtal                                  174   0.31%  0x40080d48 .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_fast_src_set                                       70   0.12%  0x40084e7c .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_get_lact_compensation_delay                        52   0.09%  0x40080cd4 .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_slow_src_get                                       16   0.03%  0x40084e6c .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_slow_src_set                                      164   0.29%  0x40084dc8 .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_xtal_freq_get                                      36   0.06%  0x40080d08 .iram0.text
+│               │   │   │   │   │   └── rtc_clk_xtal_freq_update                                   40   0.07%  0x40084fac .iram0.text
+│               │   │   │   │   ├── rtc_init.c                                                   1150   2.05%  - 
+│               │   │   │   │   │   ├── rtc_init                                                  922   1.64%  0x4008544c .iram0.text
+│               │   │   │   │   │   ├── rtc_vddsdio_get_config                                    156   0.28%  0x400857e8 .iram0.text
+│               │   │   │   │   │   └── rtc_vddsdio_set_config                                     72   0.13%  0x40085884 .iram0.text
+│               │   │   │   │   ├── rtc_time.c                                                    842   1.50%  - 
+│               │   │   │   │   │   ├── rtc_clk_cal                                               175   0.31%  0x40085aac .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_cal_internal                                      477   0.85%  0x400858cc .iram0.text
+│               │   │   │   │   │   ├── rtc_clk_freq_cal                                           28   0.05%  0x40085c00 .iram0.text
+│               │   │   │   │   │   └── rtc_clk_wait_for_slow_cycle                               162   0.29%  0x40085b5c .iram0.text
+│               │   │   │   │   └── sar_periph_ctrl.c                                              26   0.05%  - 
+│               │   │   │   │       └── sar_periph_ctrl_init                                       26   0.05%  0x400d1660 .text
+│               │   │   │   └── esp_clk_tree_common.c                                             307   0.55%  - 
+│               │   │   │       ├── esp_clk_tree_lp_fast_get_freq_hz                               61   0.11%  0x400d1778 .text
+│               │   │   │       ├── esp_clk_tree_lp_slow_get_freq_hz                               66   0.12%  0x400d171c .text
+│               │   │   │       ├── esp_clk_tree_rc_fast_d256_get_freq_hz                          79   0.14%  0x400d167c .text
+│               │   │   │       ├── esp_clk_tree_rc_fast_get_freq_hz                               22   0.04%  0x400d1760 .text
+│               │   │   │       └── esp_clk_tree_xtal32k_get_freq_hz                               79   0.14%  0x400d16cc .text
+│               │   │   ├── regi2c_ctrl.c                                                         172   0.31%  - 
+│               │   │   │   ├── regi2c_ctrl_read_reg_mask                                          88   0.16%  0x40088278 .iram0.text
+│               │   │   │   └── regi2c_ctrl_write_reg                                              84   0.15%  0x400882d0 .iram0.text
+│               │   │   └── sleep_modes.c                                                         328   0.58%  - 
+│               │   │       ├── esp_sleep_sub_mode_config                                         137   0.24%  0x400d17b8 .text
+│               │   │       ├── esp_sleep_sub_mode_dump_config                                     54   0.10%  0x400d18a8 .text
+│               │   │       ├── esp_sleep_sub_mode_force_disable                                   97   0.17%  0x400d1844 .text
+│               │   │       └── s_submode2str                                                      40   0.07%  0x3f400608 .flash.rodata
+│               │   ├── esp_mm                                                                    737   1.31%  - 
+│               │   │   ├── cache_esp32.c                                                          22   0.04%  - 
+│               │   │   │   └── cache_sync                                                         22   0.04%  0x40085dc4 .iram0.text
+│               │   │   ├── esp_mmu_map.c                                                         643   1.14%  - 
+│               │   │   │   ├── esp_mmu_map_init                                                  465   0.83%  0x400d1938 .text
+│               │   │   │   ├── esp_mmu_paddr_find_caps                                            90   0.16%  0x40080df8 .iram0.text
+│               │   │   │   └── s_get_bus_mask                                                     88   0.16%  0x400d18e0 .text
+│               │   │   └── port                                                                   72   0.13%  - 
+│               │   │       └── esp32                                                              72   0.13%  - 
+│               │   │           └── ext_mem_layout.c                                               72   0.13%  - 
+│               │   │               └── g_mmu_mem_regions                                          72   0.13%  0x3f400630 .flash.rodata
+│               │   ├── esp_rom                                                                  1022   1.82%  - 
+│               │   │   ├── esp32                                                                  14   0.02%  - 
+│               │   │   │   └── include                                                            14   0.02%  - 
+│               │   │   │       └── esp32                                                          14   0.02%  - 
+│               │   │   │           └── rom                                                        14   0.02%  - 
+│               │   │   │               └── cache.h                                                14   0.02%  - 
+│               │   │   │                   └── Cache_Flush                                        14   0.02%  0x40080adc .iram0.text
+│               │   │   └── patches                                                              1008   1.79%  - 
+│               │   │       ├── esp_rom_gpio.c                                                     70   0.12%  - 
+│               │   │       │   └── esp_rom_gpio_connect_out_signal                                70   0.12%  0x40080e54 .iram0.text
+│               │   │       ├── esp_rom_serial_output.c                                            64   0.11%  - 
+│               │   │       │   └── esp_rom_output_tx_wait_idle                                    64   0.11%  0x40080e9c .iram0.text
+│               │   │       ├── esp_rom_spiflash.c                                                864   1.54%  - 
+│               │   │       │   ├── esp_rom_spiflash_read                                         720   1.28%  0x400883b8 .iram0.text
+│               │   │       │   ├── esp_rom_spiflash_read_status                                   99   0.18%  0x40088324 .iram0.text
+│               │   │       │   └── esp_rom_spiflash_wait_idle                                     45   0.08%  0x40088388 .iram0.text
+│               │   │       └── esp_rom_sys.c                                                      10   0.02%  - 
+│               │   │           └── esp_rom_set_cpu_ticks_per_us                                   10   0.02%  0x40087cc4 .iram0.text
+│               │   ├── esp_system                                                                385   0.68%  - 
+│               │   │   └── port                                                                  385   0.68%  - 
+│               │   │       └── soc                                                               385   0.68%  - 
+│               │   │           └── esp32                                                         385   0.68%  - 
+│               │   │               ├── clk.c                                                     211   0.38%  - 
+│               │   │               │   ├── esp_perip_clk_init                                    195   0.35%  0x400d1b1c .text
+│               │   │               │   └── esp_rtc_init                                           16   0.03%  0x400d1b0c .text
+│               │   │               └── reset_reason.c                                            174   0.31%  - 
+│               │   │                   ├── esp_reset_reason_get_hint                              28   0.05%  0x400d1be0 .text
+│               │   │                   └── esp_reset_reason_init                                 146   0.26%  0x400d1bfc .text
+│               │   ├── esp_timer                                                                 210   0.37%  - 
+│               │   │   └── src                                                                   210   0.37%  - 
+│               │   │       ├── esp_timer_impl_lac.c                                              197   0.35%  - 
+│               │   │       │   └── esp_timer_impl_early_init                                     197   0.35%  0x400d1c90 .text
+│               │   │       └── esp_timer_init.c                                                   13   0.02%  - 
+│               │   │           └── esp_timer_early_init                                           13   0.02%  0x400d1d58 .text
+│               │   ├── hal                                                                       185   0.33%  - 
+│               │   │   ├── efuse_hal.c                                                            28   0.05%  - 
+│               │   │   │   └── efuse_hal_chip_revision                                            28   0.05%  0x40080f2c .iram0.text
+│               │   │   ├── esp32                                                                  78   0.14%  - 
+│               │   │   │   └── efuse_hal.c                                                        78   0.14%  - 
+│               │   │   │       ├── efuse_hal_get_major_chip_version                               62   0.11%  0x40080edc .iram0.text
+│               │   │   │       └── efuse_hal_get_minor_chip_version                               16   0.03%  0x40080f1c .iram0.text
+│               │   │   └── mmu_hal.c                                                              79   0.14%  - 
+│               │   │       ├── mmu_hal_ctx_init                                                   14   0.02%  0x40085d70 .iram0.text
+│               │   │       └── mmu_hal_unmap_all                                                  65   0.12%  0x40085d80 .iram0.text
+│               │   ├── soc                                                                       160   0.28%  - 
+│               │   │   └── esp32                                                                 160   0.28%  - 
+│               │   │       └── gpio_periph.c                                                     160   0.28%  - 
+│               │   │           └── GPIO_PIN_MUX_REG                                              160   0.28%  0x3f400698 .flash.rodata
+│               │   └── spi_flash                                                                5441   9.68%  - 
+│               │       ├── esp_flash_api.c                                                       861   1.53%  - 
+│               │       │   ├── check_chip_pointer_default                                         31   0.06%  0x400877dc .iram0.text
+│               │       │   ├── detect_spi_flash_chip                                             100   0.18%  0x40087844 .iram0.text
+│               │       │   ├── esp_flash_get_physical_size                                        94   0.17%  0x400878d0 .iram0.text
+│               │       │   ├── esp_flash_init_main                                               296   0.53%  0x40087950 .iram0.text
+│               │       │   ├── esp_flash_is_quad_mode                                             29   0.05%  0x40087930 .iram0.text
+│               │       │   ├── esp_flash_read_chip_id                                             20   0.04%  0x400878bc .iram0.text
+│               │       │   ├── flash_end_flush_cache                                              70   0.12%  0x400877fc .iram0.text
+│               │       │   ├── read_id_core                                                       98   0.17%  0x40080aec .iram0.text
+│               │       │   ├── spiflash_end_default                                               31   0.06%  0x40087ac4 .iram0.text
+│               │       │   ├── spiflash_start_core                                                75   0.13%  0x40087a78 .iram0.text
+│               │       │   └── spiflash_start_default                                             17   0.03%  0x400878a8 .iram0.text
+│               │       ├── esp_flash_spi_init.c                                                  190   0.34%  - 
+│               │       │   ├── TAG                                                                10   0.02%  0x3ffb1a7d .loader.data
+│               │       │   └── esp_flash_init_default_chip                                       180   0.32%  0x40088964 .loader.text
+│               │       ├── flash_mmap.c                                                           90   0.16%  - 
+│               │       │   └── spi_flash_check_and_flush_cache                                    90   0.16%  0x40080b50 .iram0.text
+│               │       ├── flash_ops.c                                                            19   0.03%  - 
+│               │       │   ├── esp_mspi_32bit_address_flash_feature_check                          7   0.01%  0x40081834 .iram0.text
+│               │       │   ├── esp_mspi_pin_init                                                   5   0.01%  0x40081824 .iram0.text
+│               │       │   └── spi_flash_init_chip_state                                           7   0.01%  0x4008182c .iram0.text
+│               │       ├── memspi_host_driver.c                                                  358   0.64%  - 
+│               │       │   ├── memspi_host_flush_cache                                            25   0.04%  0x40087718 .iram0.text
+│               │       │   ├── memspi_host_init_pointers                                          56   0.10%  0x40087734 .iram0.text
+│               │       │   ├── memspi_host_read_data_slicer                                       42   0.07%  0x400877a0 .iram0.text
+│               │       │   ├── memspi_host_read_id_hs                                            126   0.22%  0x40087698 .iram0.text
+│               │       │   ├── memspi_host_read_status_hs                                         58   0.10%  0x4008765c .iram0.text
+│               │       │   └── memspi_host_write_data_slicer                                      51   0.09%  0x4008776c .iram0.text
+│               │       ├── spi_flash_chip_drivers.c                                                5   0.01%  - 
+│               │       │   └── spi_flash_chip_list_check                                           5   0.01%  0x400d3728 .text
+│               │       ├── spi_flash_chip_gd.c                                                   255   0.45%  - 
+│               │       │   ├── spi_flash_chip_gd_detect_size                                      52   0.09%  0x400867a4 .iram0.text
+│               │       │   ├── spi_flash_chip_gd_get_caps                                         25   0.04%  0x40086788 .iram0.text
+│               │       │   ├── spi_flash_chip_gd_get_io_mode                                      30   0.05%  0x4008672c .iram0.text
+│               │       │   ├── spi_flash_chip_gd_probe                                            59   0.10%  0x400867d8 .iram0.text
+│               │       │   ├── spi_flash_chip_gd_set_io_mode                                      60   0.11%  0x4008674c .iram0.text
+│               │       │   └── spi_flash_chip_gd_suspend_cmd_conf                                 29   0.05%  0x4008670c .iram0.text
+│               │       ├── spi_flash_chip_generic.c                                             2587   4.60%  - 
+│               │       │   ├── spi_flash_chip_generic_config_host_io_mode                        246   0.44%  0x4008686c .iram0.text
+│               │       │   ├── spi_flash_chip_generic_detect_size                                 67   0.12%  0x40087098 .iram0.text
+│               │       │   ├── spi_flash_chip_generic_erase_block                                194   0.35%  0x40086d4c .iram0.text
+│               │       │   ├── spi_flash_chip_generic_erase_chip                                 134   0.24%  0x400870e4 .iram0.text
+│               │       │   ├── spi_flash_chip_generic_erase_sector                               194   0.35%  0x40086e10 .iram0.text
+│               │       │   ├── spi_flash_chip_generic_get_caps                                   105   0.19%  0x40086964 .iram0.text
+│               │       │   ├── spi_flash_chip_generic_get_io_mode                                 30   0.05%  0x40086f90 .iram0.text
+│               │       │   ├── spi_flash_chip_generic_get_write_protect                           44   0.08%  0x40086b14 .iram0.text
+│               │       │   ├── spi_flash_chip_generic_page_program                               168   0.30%  0x40086ed4 .iram0.text
+│               │       │   ├── spi_flash_chip_generic_probe                                        7   0.01%  0x400870dc .iram0.text
+│               │       │   ├── spi_flash_chip_generic_read                                       143   0.25%  0x400869f0 .iram0.text
+│               │       │   ├── spi_flash_chip_generic_read_reg                                    18   0.03%  0x400871bc .iram0.text
+│               │       │   ├── spi_flash_chip_generic_read_unique_id                             108   0.19%  0x40086b84 .iram0.text
+│               │       │   ├── spi_flash_chip_generic_read_unique_id_none                          8   0.01%  0x40087250 .iram0.text
+│               │       │   ├── spi_flash_chip_generic_reset                                       85   0.15%  0x40086814 .iram0.text
+│               │       │   ├── spi_flash_chip_generic_set_io_mode                                 24   0.04%  0x40087080 .iram0.text
+│               │       │   ├── spi_flash_chip_generic_set_write_protect                           79   0.14%  0x4008716c .iram0.text
+│               │       │   ├── spi_flash_chip_generic_suspend_cmd_conf                            29   0.05%  0x400869d0 .iram0.text
+│               │       │   ├── spi_flash_chip_generic_wait_idle                                  126   0.22%  0x400871d0 .iram0.text
+│               │       │   ├── spi_flash_chip_generic_write                                      148   0.26%  0x40086a80 .iram0.text
+│               │       │   ├── spi_flash_chip_generic_write_encrypted                            168   0.30%  0x40086bf0 .iram0.text
+│               │       │   ├── spi_flash_chip_generic_yield                                       66   0.12%  0x40086b40 .iram0.text
+│               │       │   ├── spi_flash_common_read_qe_sr$constprop$0$isra$0                     52   0.09%  0x40086c98 .iram0.text
+│               │       │   ├── spi_flash_common_read_status_16b_rdsr_rdsr2                        56   0.10%  0x40086ccc .iram0.text
+│               │       │   ├── spi_flash_common_read_status_8b_rdsr                               20   0.04%  0x40086fb0 .iram0.text
+│               │       │   ├── spi_flash_common_read_status_8b_rdsr2                              20   0.04%  0x40086f7c .iram0.text
+│               │       │   ├── spi_flash_common_set_io_mode                                      139   0.25%  0x40086ff4 .iram0.text
+│               │       │   ├── spi_flash_common_write_qe_sr$isra$0                                46   0.08%  0x40086d04 .iram0.text
+│               │       │   ├── spi_flash_common_write_status_16b_wrsr                             21   0.04%  0x40086d34 .iram0.text
+│               │       │   ├── spi_flash_common_write_status_8b_wrsr                              21   0.04%  0x40086fc4 .iram0.text
+│               │       │   └── spi_flash_common_write_status_8b_wrsr2                             21   0.04%  0x40086fdc .iram0.text
+│               │       ├── spi_flash_chip_issi.c                                                  97   0.17%  - 
+│               │       │   ├── spi_flash_chip_issi_get_caps                                        7   0.01%  0x400872b4 .iram0.text
+│               │       │   ├── spi_flash_chip_issi_get_io_mode                                    30   0.05%  0x40087270 .iram0.text
+│               │       │   ├── spi_flash_chip_issi_probe                                          36   0.06%  0x40087290 .iram0.text
+│               │       │   └── spi_flash_chip_issi_set_io_mode                                    24   0.04%  0x40087258 .iram0.text
+│               │       ├── spi_flash_chip_mxic.c                                                 102   0.18%  - 
+│               │       │   ├── spi_flash_chip_mxic_detect_size                                    67   0.12%  0x400872d8 .iram0.text
+│               │       │   ├── spi_flash_chip_mxic_get_caps                                        7   0.01%  0x4008731c .iram0.text
+│               │       │   └── spi_flash_chip_mxic_probe                                          28   0.05%  0x400872bc .iram0.text
+│               │       ├── spi_flash_chip_winbond.c                                              813   1.45%  - 
+│               │       │   ├── spi_flash_chip_winbond_erase_block                                224   0.40%  0x400873d4 .iram0.text
+│               │       │   ├── spi_flash_chip_winbond_erase_sector                               224   0.40%  0x400874b4 .iram0.text
+│               │       │   ├── spi_flash_chip_winbond_get_caps                                    25   0.04%  0x40087640 .iram0.text
+│               │       │   ├── spi_flash_chip_winbond_page_program                               149   0.27%  0x40087594 .iram0.text
+│               │       │   ├── spi_flash_chip_winbond_probe                                       19   0.03%  0x4008762c .iram0.text
+│               │       │   ├── spi_flash_chip_winbond_read                                       143   0.25%  0x40087344 .iram0.text
+│               │       │   └── spi_flash_chip_winbond_suspend_cmd_conf                            29   0.05%  0x40087324 .iram0.text
+│               │       └── spi_flash_os_func_noos.c                                               64   0.11%  - 
+│               │           ├── delay_us                                                           16   0.03%  0x400877cc .iram0.text
+│               │           ├── end                                                                24   0.04%  0x40080bac .iram0.text
+│               │           └── start                                                              24   0.04%  0x40080bc4 .iram0.text
+│               └── zephyr                                                                       4362   7.76%  - 
+│                   ├── common                                                                    508   0.90%  - 
+│                   │   ├── console_init.c                                                         94   0.17%  - 
+│                   │   │   └── esp_console_init                                                   94   0.17%  0x4008429c .iram0.text
+│                   │   ├── flash_init.c                                                           58   0.10%  - 
+│                   │   │   └── esp_flash_config                                                   58   0.10%  0x40083e28 .iram0.text
+│                   │   └── soc_init.c                                                            356   0.63%  - 
+│                   │       ├── check_bootloader_validity                                         186   0.33%  0x400846b0 .iram0.text
+│                   │       ├── config_wdt                                                         86   0.15%  0x40084658 .iram0.text
+│                   │       ├── print_banner                                                       42   0.07%  0x40084600 .iram0.text
+│                   │       └── read_bootloader_header                                             42   0.07%  0x4008462c .iram0.text
+│                   ├── esp32                                                                    2321   4.13%  - 
+│                   │   └── src                                                                  2321   4.13%  - 
+│                   │       ├── soc_flash_init.c                                                 1072   1.91%  - 
+│                   │       │   ├── flash_cs_timing_config                                        110   0.20%  0x40083e74 .iram0.text
+│                   │       │   ├── flash_dummy_config                                            145   0.26%  0x400840ec .iram0.text
+│                   │       │   ├── flash_gpio_config                                             518   0.92%  0x40083ee4 .iram0.text
+│                   │       │   ├── flash_update_id                                                16   0.03%  0x40083e64 .iram0.text
+│                   │       │   └── init_spi_flash                                                283   0.50%  0x40084180 .iram0.text
+│                   │       ├── soc_init.c                                                        481   0.86%  - 
+│                   │       │   ├── ana_clock_glitch_reset_config                                   5   0.01%  0x40084950 .iram0.text
+│                   │       │   ├── bootloader_clock_configure                                    214   0.38%  0x40084870 .iram0.text
+│                   │       │   ├── check_wdt_reset                                                52   0.09%  0x400847f8 .iram0.text
+│                   │       │   ├── reset_mmu                                                      68   0.12%  0x4008482c .iram0.text
+│                   │       │   ├── soc_hw_init                                                     5   0.01%  0x40084948 .iram0.text
+│                   │       │   ├── wdt_reset_cpu0_info_enable                                     39   0.07%  0x400847d0 .iram0.text
+│                   │       │   └── wdt_reset_info_dump                                            98   0.17%  0x4008476c .iram0.text
+│                   │       └── soc_random.c                                                      768   1.37%  - 
+│                   │           ├── soc_random_disable                                            285   0.51%  0x400844e0 .iram0.text
+│                   │           └── soc_random_enable                                             483   0.86%  0x400842fc .iram0.text
+│                   └── port                                                                     1533   2.73%  - 
+│                       └── bootloader                                                           1533   2.73%  - 
+│                           └── bootloader_flash.c                                               1533   2.73%  - 
+│                               ├── bootloader_enable_wp                                           19   0.03%  0x400887e8 .loader.text
+│                               ├── bootloader_execute_flash_command                               32   0.06%  0x40081194 .iram0.text
+│                               ├── bootloader_flash_execute_command_common                       586   1.04%  0x40080f48 .iram0.text
+│                               ├── bootloader_flash_read_sfdp                                     33   0.06%  0x40081308 .iram0.text
+│                               ├── bootloader_flash_unlock_default                               340   0.60%  0x400811b4 .iram0.text
+│                               ├── bootloader_flash_xmc_startup                                  164   0.29%  0x40081354 .iram0.text
+│                               ├── bootloader_read_flash_id                                       40   0.07%  0x4008132c .iram0.text
+│                               ├── esp_rom_flash_read                                            241   0.43%  0x400886f4 .loader.text
+│                               └── is_xmc_chip_strict                                             78   0.14%  0x4008183c .iram0.text
+└── ZEPHYR_BASE                                                                                 17071  30.36%  - 
+    ├── arch                                                                                     1683   2.99%  - 
+    │   ├── common                                                                                 87   0.15%  - 
+    │   │   ├── dynamic_isr.c                                                                      42   0.07%  - 
+    │   │   │   ├── arch_irq_connect_dynamic                                                       18   0.03%  0x40082250 .iram0.text
+    │   │   │   └── z_isr_install                                                                  24   0.04%  0x40082238 .iram0.text
+    │   │   ├── init.c                                                                             40   0.07%  - 
+    │   │   │   ├── arch_bss_zero                                                                  22   0.04%  0x40082278 .iram0.text
+    │   │   │   └── arch_early_memset                                                              18   0.03%  0x40082264 .iram0.text
+    │   │   └── sw_isr_common.c                                                                     5   0.01%  - 
+    │   │       └── z_get_sw_isr_table_idx                                                          5   0.01%  0x40082290 .iram0.text
+    │   └── xtensa                                                                               1596   2.84%  - 
+    │       └── core                                                                             1596   2.84%  - 
+    │           ├── cpu_idle.c                                                                      8   0.01%  - 
+    │           │   └── arch_cpu_idle                                                               8   0.01%  0x40082200 .iram0.text
+    │           ├── fatal.c                                                                        69   0.12%  - 
+    │           │   ├── xtensa_exccause                                                            23   0.04%  0x400819a4 .iram0.text
+    │           │   └── xtensa_fatal_error                                                         46   0.08%  0x400819bc .iram0.text
+    │           ├── irq_manage.c                                                                   22   0.04%  - 
+    │           │   └── z_irq_spurious                                                             22   0.04%  0x40081c20 .iram0.text
+    │           ├── prep_c.c                                                                       50   0.09%  - 
+    │           │   └── z_prep_c                                                                   50   0.09%  0x40082038 .iram0.text
+    │           ├── thread.c                                                                       64   0.11%  - 
+    │           │   ├── arch_coprocessors_disable                                                   8   0.01%  0x40082208 .iram0.text
+    │           │   └── arch_new_thread                                                            56   0.10%  0x40081c38 .iram0.text
+    │           ├── vector_handlers.c                                                             944   1.68%  - 
+    │           │   ├── return_to                                                                  24   0.04%  0x40081cbc .iram0.text
+    │           │   ├── xtensa_dump_stack                                                         230   0.41%  0x40081d40 .iram0.text
+    │           │   ├── xtensa_excint1_c                                                          330   0.59%  0x40081eec .iram0.text
+    │           │   ├── xtensa_handle_irq_lvl                                                      76   0.14%  0x40081c70 .iram0.text
+    │           │   ├── xtensa_int2_c                                                              29   0.05%  0x40081e28 .iram0.text
+    │           │   ├── xtensa_int3_c                                                              29   0.05%  0x40081e48 .iram0.text
+    │           │   ├── xtensa_int4_c                                                              29   0.05%  0x40081e68 .iram0.text
+    │           │   ├── xtensa_int5_c                                                              29   0.05%  0x40081e88 .iram0.text
+    │           │   ├── xtensa_int6_c                                                              29   0.05%  0x40081ea8 .iram0.text
+    │           │   ├── xtensa_is_frame_pointer_valid                                              44   0.08%  0x40081d14 .iram0.text
+    │           │   ├── xtensa_is_outside_stack_bounds                                             62   0.11%  0x40081cd4 .iram0.text
+    │           │   └── xtensa_nmi_c                                                               33   0.06%  0x40081ec8 .iram0.text
+    │           └── xtensa_backtrace.c                                                            439   0.78%  - 
+    │               ├── xtensa_backtrace_get_next_frame                                            74   0.13%  0x40082094 .iram0.text
+    │               ├── xtensa_backtrace_print                                                    288   0.51%  0x400820e0 .iram0.text
+    │               ├── xtensa_cpu_process_stack_pc                                                37   0.07%  0x40082210 .iram0.text
+    │               └── xtensa_stack_ptr_is_sane                                                   40   0.07%  0x4008206c .iram0.text
+    ├── drivers                                                                                  6868  12.22%  - 
+    │   ├── clock_control                                                                        1019   1.81%  - 
+    │   │   ├── clock_control_esp32.c                                                             512   0.91%  - 
+    │   │   │   ├── __device_dts_ord_43                                                            28   0.05%  0x3f40100c device_area
+    │   │   │   ├── __init___device_dts_ord_43                                                      8   0.01%  0x3f400fbc initlevel
+    │   │   │   ├── clock_control_esp32_api                                                        28   0.05%  0x3f4010a0 device_api_area
+    │   │   │   ├── clock_control_esp32_configure                                                 100   0.18%  0x400d23d8 .text
+    │   │   │   ├── clock_control_esp32_get_rate                                                   74   0.13%  0x400d2334 .text
+    │   │   │   ├── clock_control_esp32_get_status                                                 58   0.10%  0x400d22f8 .text
+    │   │   │   ├── clock_control_esp32_init                                                      112   0.20%  0x400d243c .text
+    │   │   │   ├── clock_control_esp32_off                                                        42   0.07%  0x400d2380 .text
+    │   │   │   ├── clock_control_esp32_on                                                         42   0.07%  0x400d23ac .text
+    │   │   │   └── esp32_clock_config0                                                            20   0.04%  0x3f400770 .flash.rodata
+    │   │   └── clock_control_esp32_rtc_cntl.c                                                    507   0.90%  - 
+    │   │       ├── esp32_cpu_clock_configure                                                     323   0.57%  0x400d2568 .text
+    │   │       ├── esp32_select_rtc_fast_clk                                                      14   0.02%  0x400d2558 .text
+    │   │       └── esp32_select_rtc_slow_clk                                                     170   0.30%  0x400d24ac .text
+    │   ├── console                                                                                82   0.15%  - 
+    │   │   └── uart_console.c                                                                     82   0.15%  - 
+    │   │       ├── __init_uart_console_init                                                        8   0.01%  0x3f400fe4 initlevel
+    │   │       ├── console_out                                                                    34   0.06%  0x40085d4c .iram0.text
+    │   │       └── uart_console_init                                                              40   0.07%  0x400d26ac .text
+    │   ├── gpio                                                                                 1922   3.42%  - 
+    │   │   └── gpio_esp32.c                                                                     1922   3.42%  - 
+    │   │       ├── __device_dts_ord_108                                                           28   0.05%  0x3f401028 device_area
+    │   │       ├── __device_dts_ord_8                                                             28   0.05%  0x3f401044 device_area
+    │   │       ├── __init___device_dts_ord_108                                                     8   0.01%  0x3f400fd4 initlevel
+    │   │       ├── __init___device_dts_ord_8                                                       8   0.01%  0x3f400fcc initlevel
+    │   │       ├── __init_gpio_esp32_sys_init                                                      8   0.01%  0x3f400ffc initlevel
+    │   │       ├── gpio_esp32_config                                                             856   1.52%  0x400814cc .iram0.text
+    │   │       ├── gpio_esp32_driver_api                                                          36   0.06%  0x3f40107c device_api_area
+    │   │       ├── gpio_esp32_fire_callbacks                                                     171   0.30%  0x400818c4 .iram0.text
+    │   │       ├── gpio_esp32_get_pending_int                                                     81   0.14%  0x400d3a90 .text
+    │   │       ├── gpio_esp32_init                                                                43   0.08%  0x400d2854 .text
+    │   │       ├── gpio_esp32_isr                                                                 23   0.04%  0x400814b4 .iram0.text
+    │   │       ├── gpio_esp32_manage_callback                                                     88   0.16%  0x400d3a38 .text
+    │   │       ├── gpio_esp32_pin_interrupt_configure                                            327   0.58%  0x400d270c .text
+    │   │       ├── gpio_esp32_port_clear_bits_raw                                                 29   0.05%  0x400d39e0 .text
+    │   │       ├── gpio_esp32_port_get_raw                                                        32   0.06%  0x400d395c .text
+    │   │       ├── gpio_esp32_port_set_bits_raw                                                   29   0.05%  0x400d39c0 .text
+    │   │       ├── gpio_esp32_port_set_masked_raw                                                 65   0.12%  0x400d397c .text
+    │   │       ├── gpio_esp32_port_toggle_bits                                                    55   0.10%  0x400d3a00 .text
+    │   │       └── gpio_esp32_sys_init                                                             7   0.01%  0x400d3ae4 .text
+    │   ├── interrupt_controller                                                                 1467   2.61%  - 
+    │   │   └── intc_esp32.c                                                                     1467   2.61%  - 
+    │   │       ├── esp_intr_alloc                                                                 28   0.05%  0x400d22dc .text
+    │   │       ├── esp_intr_alloc_intrstatus                                                     914   1.63%  0x400d1f48 .text
+    │   │       ├── esp_intr_disable                                                              159   0.28%  0x40081414 .iram0.text
+    │   │       ├── find_desc_for_int                                                              35   0.06%  0x400d1e0c .text
+    │   │       ├── get_desc_for_int                                                              138   0.25%  0x400d1ebc .text
+    │   │       ├── is_vect_desc_usable                                                           140   0.25%  0x400d1e30 .text
+    │   │       └── shared_intr_isr                                                                53   0.09%  0x4008188c .iram0.text
+    │   ├── pinctrl                                                                               942   1.68%  - 
+    │   │   ├── common.c                                                                           45   0.08%  - 
+    │   │   │   └── pinctrl_lookup_state                                                           45   0.08%  0x400d3aec .text
+    │   │   └── pinctrl_esp32.c                                                                   897   1.60%  - 
+    │   │       ├── esp32_gpio_ports_addrs                                                          8   0.01%  0x3f400784 .flash.rodata
+    │   │       └── pinctrl_configure_pins                                                        889   1.58%  0x400d2880 .text
+    │   ├── serial                                                                               1127   2.00%  - 
+    │   │   └── uart_esp32.c                                                                     1127   2.00%  - 
+    │   │       ├── __device_dts_ord_78                                                            28   0.05%  0x3f401060 device_area
+    │   │       ├── __init___device_dts_ord_78                                                      8   0.01%  0x3f400fdc initlevel
+    │   │       ├── uart_esp32_api                                                                 20   0.04%  0x3f4010bc device_api_area
+    │   │       ├── uart_esp32_config_get                                                         304   0.54%  0x400d2c4c .text
+    │   │       ├── uart_esp32_configure                                                          385   0.68%  0x400d2d7c .text
+    │   │       ├── uart_esp32_err_check                                                           78   0.14%  0x400d2bfc .text
+    │   │       ├── uart_esp32_init                                                               102   0.18%  0x400d2fcc .text
+    │   │       ├── uart_esp32_poll_in                                                            152   0.27%  0x400d2f34 .text
+    │   │       └── uart_esp32_poll_out                                                            50   0.09%  0x400d2f00 .text
+    │   └── timer                                                                                 309   0.55%  - 
+    │       ├── sys_lpm_hooks_stubs.c                                                               5   0.01%  - 
+    │       │   └── z_sys_clock_lpm_init                                                            5   0.01%  0x400d3b1c .text
+    │       ├── system_timer_generic.h                                                            128   0.23%  - 
+    │       │   ├── sys_clock_cycle_get_32                                                          8   0.01%  0x40085d44 .iram0.text
+    │       │   ├── sys_clock_elapsed                                                              30   0.05%  0x40085d24 .iram0.text
+    │       │   ├── sys_clock_set_timeout                                                          14   0.02%  0x40085d14 .iram0.text
+    │       │   └── timer_core_arm                                                                 76   0.14%  0x40085c1c .iram0.text
+    │       └── xtensa_sys_timer.c                                                                176   0.31%  - 
+    │           ├── __init_sys_clock_driver_init                                                    8   0.01%  0x3f400fec initlevel
+    │           ├── ccompare_isr                                                                   90   0.16%  0x40085c68 .iram0.text
+    │           └── sys_clock_driver_init                                                          78   0.14%  0x40085cc4 .iram0.text
+    ├── include                                                                                   159   0.28%  - 
+    │   └── zephyr                                                                                159   0.28%  - 
+    │       ├── arch                                                                               20   0.04%  - 
+    │       │   └── xtensa                                                                         20   0.04%  - 
+    │       │       └── irq.h                                                                      20   0.04%  - 
+    │       │           └── z_xt_ints_off                                                          20   0.04%  0x400d3948 .text
+    │       ├── drivers                                                                           120   0.21%  - 
+    │       │   └── gpio.h                                                                        120   0.21%  - 
+    │       │       ├── gpio_pin_configure_dt                                                      80   0.14%  0x400d0310 .text
+    │       │       └── z_impl_gpio_pin_set$isra$0                                                 40   0.07%  0x400d363c .text
+    │       └── sys                                                                                19   0.03%  - 
+    │           └── dlist.h                                                                        19   0.03%  - 
+    │               └── sys_dlist_remove                                                           19   0.03%  0x40083840 .iram0.text
+    ├── kernel                                                                                   5553   9.88%  - 
+    │   ├── device.c                                                                               81   0.14%  - 
+    │   │   ├── do_device_init                                                                     53   0.09%  0x4008379c .iram0.text
+    │   │   └── z_impl_device_is_ready                                                             28   0.05%  0x400837d4 .iram0.text
+    │   ├── fatal.c                                                                               155   0.28%  - 
+    │   │   ├── arch_system_halt                                                                    9   0.02%  0x400837f0 .iram0.text
+    │   │   ├── k_sys_fatal_error_handler                                                          26   0.05%  0x40082298 .iram0.text
+    │   │   └── z_fatal_error                                                                     120   0.21%  0x400822b4 .iram0.text
+    │   ├── idle.c                                                                                 15   0.03%  - 
+    │   │   └── idle                                                                               15   0.03%  0x40082548 .iram0.text
+    │   ├── include                                                                               105   0.19%  - 
+    │   │   ├── kernel_offsets.h                                                                    5   0.01%  - 
+    │   │   │   └── _OffsetAbsSyms                                                                  5   0.01%  0x400d3634 .text
+    │   │   ├── ksched.h                                                                           29   0.05%  - 
+    │   │   │   └── unpend_thread_no_timeout                                                       29   0.05%  0x400828e0 .iram0.text
+    │   │   └── kswap.h                                                                            71   0.13%  - 
+    │   │       └── z_swap$isra$0                                                                  71   0.13%  0x40082900 .iram0.text
+    │   ├── init.c                                                                                536   0.95%  - 
+    │   │   ├── bg_thread_main                                                                    182   0.32%  0x4008235c .iram0.text
+    │   │   ├── z_cstart                                                                          196   0.35%  0x40082484 .iram0.text
+    │   │   ├── z_init_cpu                                                                        110   0.20%  0x40082414 .iram0.text
+    │   │   └── z_sys_init_run_level                                                               48   0.09%  0x4008232c .iram0.text
+    │   ├── kheap.c                                                                                65   0.12%  - 
+    │   │   ├── __init_statics_init_pre                                                             8   0.01%  0x3f400fc4 initlevel
+    │   │   ├── k_heap_init                                                                        23   0.04%  0x40083760 .iram0.text
+    │   │   └── statics_init                                                                       34   0.06%  0x40083778 .iram0.text
+    │   ├── mempool.c                                                                             106   0.19%  - 
+    │   │   ├── k_free                                                                             28   0.05%  0x40083720 .iram0.text
+    │   │   ├── k_malloc                                                                           24   0.04%  0x4008373c .iram0.text
+    │   │   ├── k_thread_system_pool_assign                                                        11   0.02%  0x40083754 .iram0.text
+    │   │   └── z_alloc_helper                                                                     43   0.08%  0x40083878 .iram0.text
+    │   ├── mutex.c                                                                                28   0.05%  - 
+    │   │   └── z_impl_k_mutex_init                                                                28   0.05%  0x400837fc .iram0.text
+    │   ├── sched.c                                                                              1564   2.78%  - 
+    │   │   ├── add_to_waitq_locked                                                                88   0.16%  0x40082d1c .iram0.text
+    │   │   ├── move_current_to_end_of_prio_q                                                     124   0.22%  0x40082948 .iram0.text
+    │   │   ├── ready_thread                                                                      152   0.27%  0x400829c4 .iram0.text
+    │   │   ├── reschedule                                                                         44   0.08%  0x40082c08 .iram0.text
+    │   │   ├── reschedule_locked                                                                  16   0.03%  0x40082c34 .iram0.text
+    │   │   ├── unready_thread                                                                     98   0.17%  0x40082a74 .iram0.text
+    │   │   ├── z_get_next_switch_handle                                                           34   0.06%  0x40082f50 .iram0.text
+    │   │   ├── z_pend_curr                                                                        64   0.11%  0x40082dc8 .iram0.text
+    │   │   ├── z_ready_thread                                                                     22   0.04%  0x40082a5c .iram0.text
+    │   │   ├── z_reschedule_irqlock                                                               78   0.14%  0x40082f00 .iram0.text
+    │   │   ├── z_sched_lock_reschedule                                                            78   0.14%  0x40082c44 .iram0.text
+    │   │   ├── z_sched_wake_thread_locked                                                         46   0.08%  0x40082d74 .iram0.text
+    │   │   ├── z_sched_yield                                                                     136   0.24%  0x40082c94 .iram0.text
+    │   │   ├── z_thread_halt                                                                     304   0.54%  0x40082ad8 .iram0.text
+    │   │   ├── z_thread_prio_set                                                                 247   0.44%  0x40082e08 .iram0.text
+    │   │   └── z_thread_timeout                                                                   33   0.06%  0x40082da4 .iram0.text
+    │   ├── scheduler.c                                                                            79   0.14%  - 
+    │   │   ├── k_sched_lock                                                                       27   0.05%  0x40083028 .iram0.text
+    │   │   ├── k_sched_unlock                                                                     27   0.05%  0x40083044 .iram0.text
+    │   │   ├── z_impl_k_sched_current_thread_query                                                10   0.02%  0x40083060 .iram0.text
+    │   │   └── z_sched_init                                                                       15   0.03%  0x40083018 .iram0.text
+    │   ├── sem.c                                                                                 165   0.29%  - 
+    │   │   ├── z_impl_k_sem_give                                                                 104   0.18%  0x40082558 .iram0.text
+    │   │   └── z_impl_k_sem_take                                                                  61   0.11%  0x400825c0 .iram0.text
+    │   ├── sleep.c                                                                               162   0.29%  - 
+    │   │   └── z_impl_k_sleep_ticks                                                              162   0.29%  0x40082f74 .iram0.text
+    │   ├── sys                                                                                    24   0.04%  - 
+    │   │   └── thread_entry.c                                                                     24   0.04%  - 
+    │   │       └── z_thread_entry                                                                 24   0.04%  0x400d1d68 .text
+    │   ├── thread.c                                                                              759   1.35%  - 
+    │   │   ├── k_thread_name_get                                                                   8   0.01%  0x40083818 .iram0.text
+    │   │   ├── k_thread_runtime_stats_all_get                                                    100   0.18%  0x40082748 .iram0.text
+    │   │   ├── k_thread_runtime_stats_get                                                         37   0.07%  0x40082720 .iram0.text
+    │   │   ├── z_dummy_thread_init                                                                54   0.10%  0x400827ac .iram0.text
+    │   │   ├── z_impl_k_thread_abort                                                              14   0.02%  0x400828c4 .iram0.text
+    │   │   ├── z_impl_k_thread_create                                                             78   0.14%  0x40082844 .iram0.text
+    │   │   ├── z_impl_k_thread_name_set                                                           40   0.07%  0x40082600 .iram0.text
+    │   │   ├── z_impl_k_thread_priority_set                                                       36   0.06%  0x400827e4 .iram0.text
+    │   │   ├── z_impl_k_thread_stack_space_get                                                    21   0.04%  0x40082708 .iram0.text
+    │   │   ├── z_impl_k_wakeup                                                                    60   0.11%  0x40082808 .iram0.text
+    │   │   ├── z_impl_k_yield                                                                     11   0.02%  0x400828d4 .iram0.text
+    │   │   ├── z_setup_new_thread                                                                222   0.39%  0x40082628 .iram0.text
+    │   │   ├── z_stack_space_get                                                                  31   0.06%  0x40083820 .iram0.text
+    │   │   └── z_thread_abort                                                                     47   0.08%  0x40082894 .iram0.text
+    │   ├── thread_monitor.c                                                                      122   0.22%  - 
+    │   │   ├── k_thread_foreach_unlocked                                                          18   0.03%  0x40083228 .iram0.text
+    │   │   ├── thread_foreach_helper$constprop$0                                                  58   0.10%  0x400831bc .iram0.text
+    │   │   └── z_thread_monitor_exit                                                              46   0.08%  0x400831f8 .iram0.text
+    │   ├── timeout                                                                                15   0.03%  - 
+    │   │   └── list.h                                                                             15   0.03%  - 
+    │   │       └── z_timeout_q_first                                                              15   0.03%  0x4008323c .iram0.text
+    │   ├── timeout.c                                                                             818   1.45%  - 
+    │   │   ├── elapsed                                                                            22   0.04%  0x40083290 .iram0.text
+    │   │   ├── next_timeout                                                                       66   0.12%  0x4008324c .iram0.text
+    │   │   ├── sys_clock_announce_locked                                                         207   0.37%  0x40083478 .iram0.text
+    │   │   ├── sys_clock_tick_get                                                                 36   0.06%  0x40083548 .iram0.text
+    │   │   ├── sys_clock_tick_get_32                                                              13   0.02%  0x4008356c .iram0.text
+    │   │   ├── z_add_timeout                                                                     302   0.54%  0x400832a8 .iram0.text
+    │   │   ├── z_impl_k_uptime_ticks                                                              15   0.03%  0x4008357c .iram0.text
+    │   │   ├── z_timeout_inflight_superseded                                                      33   0.06%  0x40083454 .iram0.text
+    │   │   └── z_try_abort_timeout                                                               124   0.22%  0x400833d8 .iram0.text
+    │   ├── timeslicing.c                                                                         325   0.58%  - 
+    │   │   ├── slice_reset                                                                        89   0.16%  0x400830e4 .iram0.text
+    │   │   ├── slice_timeout                                                                      49   0.09%  0x400830b0 .iram0.text
+    │   │   ├── z_time_slice                                                                      101   0.18%  0x40083154 .iram0.text
+    │   │   ├── z_time_slice_reset                                                                 20   0.04%  0x40083140 .iram0.text
+    │   │   └── z_time_slice_size                                                                  66   0.12%  0x4008306c .iram0.text
+    │   └── usage.c                                                                               429   0.76%  - 
+    │       ├── sched_cpu_update_usage                                                             34   0.06%  0x40083854 .iram0.text
+    │       ├── z_sched_cpu_usage                                                                 214   0.38%  0x400835f0 .iram0.text
+    │       ├── z_sched_thread_usage                                                               86   0.15%  0x400836c8 .iram0.text
+    │       ├── z_sched_usage_start                                                                21   0.04%  0x4008358c .iram0.text
+    │       └── z_sched_usage_stop                                                                 74   0.13%  0x400835a4 .iram0.text
+    ├── lib                                                                                      1200   2.13%  - 
+    │   ├── heap                                                                                  917   1.63%  - 
+    │   │   ├── heap.c                                                                            877   1.56%  - 
+    │   │   │   ├── alloc_chunk                                                                   131   0.23%  0x400d0bb4 .text
+    │   │   │   ├── free_list_add                                                                  95   0.17%  0x400d0b30 .text
+    │   │   │   ├── free_list_remove                                                               34   0.06%  0x400d0b90 .text
+    │   │   │   ├── free_list_remove_bidx                                                          62   0.11%  0x400d36d8 .text
+    │   │   │   ├── merge_chunks                                                                   58   0.10%  0x400d0c38 .text
+    │   │   │   ├── split_chunks                                                                   66   0.12%  0x400d0c74 .text
+    │   │   │   ├── sys_heap_alloc                                                                104   0.18%  0x400d0d5c .text
+    │   │   │   ├── sys_heap_free                                                                 164   0.29%  0x400d0cb8 .text
+    │   │   │   ├── sys_heap_init                                                                 146   0.26%  0x400d0dd8 .text
+    │   │   │   └── sys_heap_noalign_alloc                                                         17   0.03%  0x400d0dc4 .text
+    │   │   └── heap.h                                                                             40   0.07%  - 
+    │   │       ├── chunk_size                                                                     14   0.02%  0x400d36ac .text
+    │   │       └── set_chunk_used                                                                 26   0.05%  0x400d36bc .text
+    │   ├── libc                                                                                  118   0.21%  - 
+    │   │   ├── common                                                                             49   0.09%  - 
+    │   │   │   └── source                                                                         49   0.09%  - 
+    │   │   │       └── stdlib                                                                     49   0.09%  - 
+    │   │   │           └── malloc.c                                                               49   0.09%  - 
+    │   │   │               ├── __init_malloc_prepare                                               8   0.01%  0x3f400ff4 initlevel
+    │   │   │               └── malloc_prepare                                                     41   0.07%  0x400d1de0 .text
+    │   │   └── picolibc                                                                           69   0.12%  - 
+    │   │       ├── assert.c                                                                        9   0.02%  - 
+    │   │       │   └── __assert_no_args                                                            9   0.02%  0x400d1d80 .text
+    │   │       └── stdio.c                                                                        60   0.11%  - 
+    │   │           ├── __stdout_hook_install                                                      24   0.04%  0x400d1db4 .text
+    │   │           ├── picolibc_put                                                               18   0.03%  0x400d1da0 .text
+    │   │           └── z_impl_zephyr_fputc                                                        18   0.03%  0x400d1d8c .text
+    │   └── os                                                                                    165   0.29%  - 
+    │       ├── boot_banner.c                                                                      24   0.04%  - 
+    │       │   ├── __init_boot_banner                                                              8   0.01%  0x3f401004 initlevel
+    │       │   └── boot_banner                                                                    16   0.03%  0x400d0e6c .text
+    │       └── printk.c                                                                          141   0.25%  - 
+    │           ├── __printk_hook_install                                                          10   0.02%  0x400d0ea8 .text
+    │           ├── char_out                                                                       17   0.03%  0x400839dc .iram0.text
+    │           ├── printk                                                                         39   0.07%  0x40083a0c .iram0.text
+    │           ├── printk_panic                                                                    5   0.01%  0x400d3718 .text
+    │           ├── vprintk                                                                        26   0.05%  0x400839f0 .iram0.text
+    │           └── vprintk_core                                                                   44   0.08%  0x400d0e7c .text
+    ├── soc                                                                                      1273   2.26%  - 
+    │   └── espressif                                                                            1273   2.26%  - 
+    │       ├── common                                                                           1055   1.88%  - 
+    │       │   ├── loader.c                                                                     1009   1.79%  - 
+    │       │   │   ├── __start                                                                   115   0.20%  0x40083db4 .iram0.text
+    │       │   │   └── map_rom_segments                                                          894   1.59%  0x40083a34 .iram0.text
+    │       │   └── soc_ptr_check.c                                                                46   0.08%  - 
+    │       │       ├── xtensa_soc_ptr_executable                                                  16   0.03%  0x40080aac .iram0.text
+    │       │       └── xtensa_soc_stack_ptr_is_sane                                               30   0.05%  0x40080abc .iram0.text
+    │       └── esp32                                                                             218   0.39%  - 
+    │           ├── hw_init.c                                                                     164   0.29%  - 
+    │           │   └── hardware_init                                                             164   0.29%  0x40084958 .iram0.text
+    │           └── soc.c                                                                          54   0.10%  - 
+    │               ├── __esp_platform_app_start                                                   27   0.05%  0x40080a74 .iram0.text
+    │               └── arch_printk_char_out                                                       27   0.05%  0x40080a90 .iram0.text
+    └── subsys                                                                                    335   0.60%  - 
+        └── debug                                                                                 335   0.60%  - 
+            └── thread_analyzer                                                                   335   0.60%  - 
+                └── thread_analyzer.c                                                             335   0.60%  - 
+                    ├── thread_analyze_cb                                                         163   0.29%  0x400d0eec .text
+                    ├── thread_analyzer_print                                                      26   0.05%  0x400d0fec .text
+                    ├── thread_analyzer_run                                                        91   0.16%  0x400d0f90 .text
+                    └── thread_print_cb                                                            55   0.10%  0x400d0eb4 .text
+==========================================================================================================================================
+                                                                                                56224

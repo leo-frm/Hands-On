@@ -1,0 +1,56 @@
+mainmenu "Desafio final: sistema de eventos com processamento de 100 ms"
+
+config APP_STIMULUS
+    bool "Gerar estimulo automatico (jumper GPIO18 -> GPIO4)"
+    default y
+
+config APP_VERBOSE
+    bool "Imprimir cada evento processado (alem do contador)"
+    default n
+
+config APP_HEARTBEAT
+    bool "Thread heartbeat (mede jitter de escalonamento)"
+    default n
+
+config APP_POLL_PERIOD_MS
+    int "Periodo de polling (ms)"
+    default 10
+    range 1 1000
+
+config APP_EVENT_PERIOD_MS
+    int "Periodo entre estimulos (ms) - 197 ms ~ 5 eventos/s"
+    default 197
+    range 2 10000
+
+config APP_PULSE_WIDTH_MS
+    int "Largura do pulso de estimulo (ms)"
+    default 20
+    range 1 5000
+
+config APP_NUM_EVENTS
+    int "Numero de eventos medidos"
+    default 50
+
+config APP_WARMUP_EVENTS
+    int "Eventos de aquecimento (descartados)"
+    default 3
+
+config APP_PROCESSING_US
+    int "Duracao do processamento simulado por evento (us)"
+    default 100000
+
+config APP_PROC_BUSY
+    bool "Processamento com k_busy_wait (consome CPU); se n, k_msleep (thread dorme)"
+    default n
+
+config APP_WORKER_PRIORITY
+    int "Prioridade da thread worker / polling"
+    default 1
+
+# O gerador de estimulo faz o papel de um evento externo: com prioridade 0 o
+# processamento de 100 ms (prioridade 1) nao atrasa nem alarga os pulsos.
+config APP_MAIN_PRIORITY
+    int "Prioridade da main (gera o estimulo)"
+    default 0
+
+source "Kconfig.zephyr"

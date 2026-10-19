@@ -1,0 +1,89 @@
+
+/home/user/work/builds/exp8_irq_thread_sleep/zephyr/zephyr.elf:     file format elf32-xtensa-le
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .rtc.text     00000000  400c0000  400c0000  00023c90  2**0
+                  CONTENTS
+  1 .rtc.dummy    00000000  3ff80000  3ff80000  00023c90  2**0
+                  CONTENTS
+  2 .rtc.force_fast 00000000  3ff80000  3ff80000  00023c90  2**0
+                  CONTENTS
+  3 .rtc.data     00000000  50000000  50000000  00023c90  2**0
+                  CONTENTS
+  4 .rtc.force_slow 00000028  50000000  00000000  00000194  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  5 .rtc_noinit   00000000  50000028  50000028  00023c90  2**0
+                  CONTENTS
+  6 .rtc_slow_reserved 00000000  50001fe8  50001fe8  00023c90  2**0
+                  CONTENTS
+  7 .iram0.vectors 00000400  40080000  00000028  000001bc  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  8 .iram0.text   00008288  40080400  00000428  000005bc  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  9 .loader.text  000003a8  40088688  000086b0  00008844  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+ 10 .iram0.text_end 000000d0  40088a30  00008a58  0000a258  2**0
+                  ALLOC
+ 11 .iram0.data   00000000  40088b00  40088b00  00023c90  2**0
+                  CONTENTS
+ 12 .iram0.bss    00000000  40088b00  40088b00  00023c90  2**0
+                  CONTENTS
+ 13 .dram0.data   00001668  3ffb0000  00008a58  00008bf0  2**3
+                  CONTENTS, ALLOC, LOAD, DATA
+ 14 .loader.data  00000420  3ffb1668  0000a0c0  0000a258  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+ 15 sw_isr_table  00000100  3ffb1a88  0000a4e0  0000a678  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+ 16 device_states 00000008  3ffb1b88  0000a5e0  0000a778  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+ 17 k_heap_area   00000014  3ffb1b90  0000a5e8  0000a780  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+ 18 k_sem_area    00000010  3ffb1ba4  0000a5fc  0000a794  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+ 19 .dram0.bss    00001530  3ffb1bb8  0000a60c  0000a7a8  2**3
+                  ALLOC
+ 20 .dram0.noinit 00002000  3ffe8c00  3ffe8c00  00023c90  2**4
+                  ALLOC
+ 21 .flash.rodata_dummy 000059f4  0000a60c  0000a60c  0000a7a4  2**0
+                  ALLOC
+ 22 .flash.rodata 00000fcc  3f400000  00010000  00010000  2**16
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+ 23 .flash.rodata_end 0000ef20  3f4010e0  000110e0  000110e0  2**4
+                  CONTENTS, ALLOC, LOAD, DATA
+ 24 initlevel     00000050  3f400fcc  00010fcc  00010fcc  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+ 25 device_area   00000070  3f40101c  0001101c  0001101c  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+ 26 device_api_area 00000054  3f40108c  0001108c  0001108c  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+ 27 .text_dummy   00000000  00020000  00020000  00023c90  2**0
+                  CONTENTS
+ 28 .text         00003c90  400d0000  00020000  00020000  2**16
+                  CONTENTS, ALLOC, LOAD, CODE
+ 29 .comment      0000001f  00000000  00000000  00023c90  2**0
+                  CONTENTS, READONLY
+ 30 .debug_aranges 00002660  00000000  00000000  00023cb0  2**3
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 31 .debug_info   000907a2  00000000  00000000  00026310  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 32 .debug_abbrev 000169f3  00000000  00000000  000b6ab2  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 33 .debug_line   0004c401  00000000  00000000  000cd4a5  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 34 .debug_frame  00005868  00000000  00000000  001198a8  2**2
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 35 .debug_str    000168cd  00000000  00000000  0011f110  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 36 .debug_line_str 00005a26  00000000  00000000  001359dd  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 37 .debug_loclists 00018c8d  00000000  00000000  0013b403  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 38 .debug_rnglists 000039d6  00000000  00000000  00154090  2**0
+                  CONTENTS, READONLY, DEBUGGING, OCTETS
+ 39 .xtensa.info  00000038  00000000  00000000  00157a66  2**0
+                  CONTENTS, READONLY
+ 40 .xt.prop      00009de0  00000000  00000000  00157a9e  2**0
+                  CONTENTS, READONLY
+ 41 .xt.lit       000005e0  00000000  00000000  0016187e  2**0
+                  CONTENTS, READONLY

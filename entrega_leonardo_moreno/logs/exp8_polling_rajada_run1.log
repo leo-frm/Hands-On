@@ -1,0 +1,87 @@
+# ORIGEM: execucao EMULADA - firmware real (west build, esp32_devkitc) rodando no
+#         QEMU da Espressif com modelo de GPIO estendido; NAO e medicao em placa fisica.
+# Experimento: exp8_polling_rajada | execucao 1
+# Configuracao: -DCONFIG_APP_PROC_BUSY=y -DCONFIG_APP_EVENT_PERIOD_MS=47
+# Emulador: -icount shift=2 (4 ns/instrucao) | GPIO: jumper-src=18, jumper-dst=4
+
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x12 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3ffb0000,len:7076
+load:0x40080000,len:35088
+ho 0 tail 12 room 4
+load:0x50000000,len:40
+entry 0x40083c94
+I (soc_init): ESP Simple boot
+I (soc_init): compile time Oct 19 2026 13:22:17
+W (soc_init): Unicore bootloader
+I (soc_init): chip revision: v0.0
+E (soc_init): You are using ESP32 chip revision (0) that is unsupported. While it may work, it could cause unexpected behavior or issues.
+E (soc_init): Proceeding with this ESP32 chip revision is not recommended unless you fully understand the potential risk and limitations.
+I (flash_init): SPI Speed      : 40MHz
+I (flash_init): SPI Mode       : DIO
+I (flash_init): SPI Flash Size : 4MB
+I (boot): DRAM	: lma=00001020h vma=3ffb0000h size=01ba4h (  7076)
+I (boot): IRAM	: lma=00002bcch vma=40080000h size=08910h ( 35088)
+I (boot): RTC_DATA	: lma=0000b4e4h vma=50000000h size=00028h (    40)
+I (boot): IROM	: lma=00010000h vma=400d0000h size=03c00h ( 15360)
+I (boot): DROM	: lma=00020000h vma=3f400000h size=10000h ( 65536)
+I (boot): libc heap size 179 kB.
+I (spi_flash): detected chip: gd
+I (spi_flash): flash io: dio
+*** Booting Zephyr OS build 03b1ebca3343 ***
+
+*** Hands-on eventos | modo: polling ***
+hw cycles/s = 240000000  | tick = 1000 Hz
+Aquecimento: 3 eventos...
+contador = 1
+Medindo: 50 eventos, periodo 47 ms...
+contador = 1
+contador = 2
+contador = 3
+contador = 4
+contador = 5
+contador = 6
+contador = 7
+contador = 8
+contador = 9
+contador = 10
+contador = 11
+contador = 12
+contador = 13
+contador = 14
+contador = 15
+contador = 16
+contador = 17
+
+===== RELATORIO (polling) =====
+janela               : 2651 ms
+eventos gerados      : 50
+eventos detectados   : 17
+eventos processados  : 17
+eventos perdidos     : 33
+lat_detect   : n=17   min=4.58  med=4940.52  max=10000.00  (us)
+CSV,LAT,polling,lat_detect,17,4583,4940529,10000004
+lat_handoff  : sem amostras
+lat_process  : n=17   min=4.58  med=4940.52  max=10000.00  (us)
+CSV,LAT,polling,lat_process,17,4583,4940529,10000004
+lat_proc_dur : n=17   min=100005.92  med=100006.17  max=100006.46  (us)
+CSV,LAT,polling,lat_proc_dur,17,100005929,100006170,100006466
+CPU ocupada (kernel) : 64.14 %
+CPU estimada (proc.) : 64.13 %
+sizeof(k_thread)=184  sizeof(k_sem)=16  sizeof(k_work)=16  sizeof(k_work_q)=216  (bytes)
+CSV,SUM,polling,poll_ms=10,proc_us=100000,period_ms=47,pulse_ms=20,gen=50,det=17,proc=17,cpu_x100=6414,cpu_est_x100=6413
+
+----- Thread Analyzer -----
+Thread analyze:
+ poll                : STACK: unused  448 usage  576 / 1024 ( 56 %); CPU:  60 %
+                     : Total CPU cycles used: 431959732
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  39 %
+                     : Total CPU cycles used: 287342153
+ main                : STACK: unused 3072 usage 1024 / 4096 ( 25 %); CPU:   0 %
+                     : Total CPU cycles used: 227379
+ ISR0                : STACK: unused 1696 usage  352 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0

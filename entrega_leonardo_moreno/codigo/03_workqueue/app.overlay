@@ -1,0 +1,9 @@
+/* Pinos do hands-on (ESP32 DevKit) */
+
+/ {
+    zephyr,user {
+        led-gpios    = <&gpio0 2  GPIO_ACTIVE_HIGH>;
+        button-gpios = <&gpio0 4  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        stim-gpios   = <&gpio0 18 GPIO_ACTIVE_LOW>;
+    };
+};

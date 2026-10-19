@@ -1,0 +1,226 @@
+-- west build: running target ram_report
+[0/1] cd /home/user/work/builds/exp4_polling && /home/user/zephyrproject/.venv/bin/python3 /home/user/zephyrproject/zephyr/scripts/footprint/size_report -k /home/user/work/builds/exp4_polling/zephyr/zephyr.elf -z /home/user/zephyrproject/zephyr -o /home/user/work/builds/exp4_polling --workspace=/home/user/zephyrproject -d 99 --json ram.json ram
+Path                                                                                             Size       %  Address    Section    
+==========================================================================================================================================
+Root                                                                                           104272 100.00%  - 
+├── (hidden)                                                                                    88117  84.51%  - 
+├── (no paths)                                                                                    502   0.48%  - 
+│   ├── CSWTCH$21                                                                                   7   0.01%  0x3ffb0e24 .dram0.data
+│   ├── CSWTCH$3                                                                                  260   0.25%  0x3ffb016c .dram0.data
+│   ├── CSWTCH$4                                                                                   64   0.06%  0x3ffb0d94 .dram0.data
+│   ├── CSWTCH$5                                                                                   20   0.02%  0x3ffb028c .dram0.data
+│   ├── CSWTCH$5                                                                                   32   0.03%  0x3ffb0d74 .dram0.data
+│   ├── CSWTCH$80                                                                                  17   0.02%  0x3ffb1495 .dram0.data
+│   ├── CSWTCH$81                                                                                  17   0.02%  0x3ffb1484 .dram0.data
+│   ├── CSWTCH$85                                                                                  17   0.02%  0x3ffb14a6 .dram0.data
+│   ├── CSWTCH$86                                                                                  17   0.02%  0x3ffb1440 .dram0.data
+│   ├── CSWTCH$88                                                                                  17   0.02%  0x3ffb1473 .dram0.data
+│   ├── CSWTCH$89                                                                                  17   0.02%  0x3ffb1462 .dram0.data
+│   └── CSWTCH$90                                                                                  17   0.02%  0x3ffb1451 .dram0.data
+├── /                                                                                            1325   1.27%  - 
+│   └── home                                                                                     1325   1.27%  - 
+│       └── user                                                                                 1325   1.27%  - 
+│           └── Hands-On                                                                         1325   1.27%  - 
+│               └── entrega_leonardo_moreno                                                      1325   1.27%  - 
+│                   └── codigo                                                                   1325   1.27%  - 
+│                       └── 00_bench_eventos                                                     1325   1.27%  - 
+│                           └── src                                                              1325   1.27%  - 
+│                               ├── bench.c                                                       117   0.11%  - 
+│                               │   ├── ev_detected                                                 4   0.00%  0x3ffb2fac .dram0.bss
+│                               │   ├── ev_generated                                                4   0.00%  0x3ffb2fb0 .dram0.bss
+│                               │   ├── ev_processed                                                4   0.00%  0x3ffb2fa8 .dram0.bss
+│                               │   ├── hb_max_dt                                                   4   0.00%  0x3ffb2fa0 .dram0.bss
+│                               │   ├── lat_detect                                                 24   0.02%  0x3ffb2c38 .dram0.bss
+│                               │   ├── lat_handoff                                                24   0.02%  0x3ffb2c20 .dram0.bss
+│                               │   ├── lat_proc_dur                                               24   0.02%  0x3ffb2bf0 .dram0.bss
+│                               │   ├── lat_process                                                24   0.02%  0x3ffb2c08 .dram0.bss
+│                               │   ├── measuring                                                   1   0.00%  0x3ffb30b4 .dram0.bss
+│                               │   └── t_stim                                                      4   0.00%  0x3ffb2fa4 .dram0.bss
+│                               └── mode_polling.c                                               1208   1.16%  - 
+│                                   ├── poll_data                                                 184   0.18%  0x3ffb2c50 .dram0.bss
+│                                   └── poll_stack                                               1024   0.98%  0x3ffe8c00 .dram0.noinit
+├── OUTPUT_DIR                                                                                    256   0.25%  - 
+│   └── zephyr                                                                                    256   0.25%  - 
+│       └── isr_tables.c                                                                          256   0.25%  - 
+│           └── _sw_isr_table                                                                     256   0.25%  0x3ffb1a88 sw_isr_table
+├── WORKSPACE                                                                                    1733   1.66%  - 
+│   └── modules                                                                                  1733   1.66%  - 
+│       └── hal                                                                                  1733   1.66%  - 
+│           └── espressif                                                                        1733   1.66%  - 
+│               ├── components                                                                   1729   1.66%  - 
+│               │   ├── esp_driver_gpio                                                            12   0.01%  - 
+│               │   │   └── src                                                                    12   0.01%  - 
+│               │   │       └── rtc_io.c                                                           12   0.01%  - 
+│               │   │           └── s_rtcio_spinlock                                               12   0.01%  0x3ffb00f8 .dram0.data
+│               │   ├── esp_hal_gpio                                                               40   0.04%  - 
+│               │   │   └── esp32                                                                  40   0.04%  - 
+│               │   │       └── rtc_io_periph.c                                                    40   0.04%  - 
+│               │   │           └── rtc_io_num_map                                                 40   0.04%  0x3ffb1618 .dram0.data
+│               │   ├── esp_hw_support                                                            293   0.28%  - 
+│               │   │   ├── periph_ctrl.c                                                          27   0.03%  - 
+│               │   │   │   ├── periph_spinlock                                                    12   0.01%  0x3ffb0104 .dram0.data
+│               │   │   │   └── ref_counts                                                         15   0.01%  0x3ffb30b6 .dram0.bss
+│               │   │   ├── port                                                                   30   0.03%  - 
+│               │   │   │   ├── esp32                                                              22   0.02%  - 
+│               │   │   │   │   └── rtc_clk.c                                                      22   0.02%  - 
+│               │   │   │   │       ├── dfs_lact_compensate_table                                  18   0.02%  0x3ffb15f0 .dram0.data
+│               │   │   │   │       └── s_cur_pll_freq                                              4   0.00%  0x3ffb2fd0 .dram0.bss
+│               │   │   │   └── esp_clk_tree_common.c                                               8   0.01%  - 
+│               │   │   │       └── s_calibrated_freq                                               8   0.01%  0x3ffb2fd4 .dram0.bss
+│               │   │   ├── regi2c_ctrl.c                                                          12   0.01%  - 
+│               │   │   │   └── regi2c_lock                                                        12   0.01%  0x3ffb0110 .dram0.data
+│               │   │   └── sleep_modes.c                                                         224   0.21%  - 
+│               │   │       ├── s_config                                                          184   0.18%  0x3ffb0000 .dram0.data
+│               │   │       └── s_sleep_sub_mode_ref_cnt                                           40   0.04%  0x50000000 .rtc.force_slow
+│               │   ├── esp_mm                                                                    152   0.15%  - 
+│               │   │   ├── cache_esp32.c                                                           8   0.01%  - 
+│               │   │   │   └── s_cache_drv                                                         8   0.01%  0x3ffb00d4 .dram0.data
+│               │   │   └── esp_mmu_map.c                                                         144   0.14%  - 
+│               │   │       └── s_mmu_ctx                                                         144   0.14%  0x3ffb2fdc .dram0.bss
+│               │   ├── esp_system                                                                  4   0.00%  - 
+│               │   │   └── port                                                                    4   0.00%  - 
+│               │   │       └── soc                                                                 4   0.00%  - 
+│               │   │           └── esp32                                                           4   0.00%  - 
+│               │   │               └── reset_reason.c                                              4   0.00%  - 
+│               │   │                   └── s_reset_reason                                          4   0.00%  0x3ffb306c .dram0.bss
+│               │   ├── hal                                                                         1   0.00%  - 
+│               │   │   └── mmu_hal.c                                                               1   0.00%  - 
+│               │   │       └── s_ctx                                                               1   0.00%  0x3ffb30b5 .dram0.bss
+│               │   ├── soc                                                                        40   0.04%  - 
+│               │   │   └── esp32                                                                  40   0.04%  - 
+│               │   │       └── gpio_periph.c                                                      40   0.04%  - 
+│               │   │           └── GPIO_PIN_MUX_REG_OFFSET                                        40   0.04%  0x3ffb1640 .dram0.data
+│               │   └── spi_flash                                                                1187   1.14%  - 
+│               │       ├── esp_flash_api.c                                                       210   0.20%  - 
+│               │       │   ├── TAG                                                                10   0.01%  0x3ffb1602 .dram0.data
+│               │       │   ├── esp_flash_api_funcs_patched                                        16   0.02%  0x3ffb14bc .dram0.data
+│               │       │   ├── esp_flash_api_funcs_patched_ptr                                     4   0.00%  0x3ffb14b8 .dram0.data
+│               │       │   └── io_mode_str                                                       180   0.17%  0x3ffb138c .dram0.data
+│               │       ├── esp_flash_spi_init.c                                                   88   0.08%  - 
+│               │       │   ├── default_chip                                                       36   0.03%  0x3ffb14cc .dram0.data
+│               │       │   ├── esp_flash_default_chip                                              4   0.00%  0x3ffb2fcc .dram0.bss
+│               │       │   └── esp_flash_default_host                                             48   0.05%  0x3ffb14f0 .dram0.data
+│               │       ├── memspi_host_driver.c                                                   95   0.09%  - 
+│               │       │   ├── TAG                                                                 7   0.01%  0x3ffb10fc .dram0.data
+│               │       │   └── esp_flash_default_host                                             88   0.08%  0x3ffb1520 .dram0.data
+│               │       ├── spi_flash_chip_drivers.c                                               28   0.03%  - 
+│               │       │   ├── default_registered_chips                                           24   0.02%  0x3ffb00e0 .dram0.data
+│               │       │   └── esp_flash_registered_chips                                          4   0.00%  0x3ffb00dc .dram0.data
+│               │       ├── spi_flash_chip_gd.c                                                   127   0.12%  - 
+│               │       │   ├── chip_name                                                           3   0.00%  0x3ffb0ec0 .dram0.data
+│               │       │   └── esp_flash_chip_gd                                                 124   0.12%  0x3ffb0e44 .dram0.data
+│               │       ├── spi_flash_chip_generic.c                                              209   0.20%  - 
+│               │       │   ├── TAG                                                                13   0.01%  0x3ffb0f60 .dram0.data
+│               │       │   ├── chip_name                                                           8   0.01%  0x3ffb0f58 .dram0.data
+│               │       │   ├── default_flash_chip_dummy                                            6   0.01%  0x3ffb1612 .dram0.data
+│               │       │   ├── esp_flash_chip_generic                                            124   0.12%  0x3ffb0edc .dram0.data
+│               │       │   ├── esp_flash_encryption_default                                       24   0.02%  0x3ffb158c .dram0.data
+│               │       │   ├── hpm_flash_chip_dummy                                                6   0.01%  0x3ffb160c .dram0.data
+│               │       │   ├── rom_flash_chip_dummy                                                4   0.00%  0x3ffb15a8 .dram0.data
+│               │       │   ├── rom_flash_chip_dummy_hpm                                            4   0.00%  0x3ffb15a4 .dram0.data
+│               │       │   └── spi_flash_chip_generic_timeout                                     20   0.02%  0x3ffb1578 .dram0.data
+│               │       ├── spi_flash_chip_issi.c                                                 129   0.12%  - 
+│               │       │   ├── chip_name                                                           5   0.00%  0x3ffb0fec .dram0.data
+│               │       │   └── esp_flash_chip_issi                                               124   0.12%  0x3ffb0f70 .dram0.data
+│               │       ├── spi_flash_chip_mxic.c                                                 129   0.12%  - 
+│               │       │   ├── chip_name                                                           5   0.00%  0x3ffb1070 .dram0.data
+│               │       │   └── esp_flash_chip_mxic                                               124   0.12%  0x3ffb0ff4 .dram0.data
+│               │       ├── spi_flash_chip_winbond.c                                              132   0.13%  - 
+│               │       │   ├── chip_name                                                           8   0.01%  0x3ffb10f4 .dram0.data
+│               │       │   └── esp_flash_chip_winbond                                            124   0.12%  0x3ffb1078 .dram0.data
+│               │       └── spi_flash_os_func_noos.c                                               40   0.04%  - 
+│               │           └── esp_flash_noos_functions                                           40   0.04%  0x3ffb15ac .dram0.data
+│               └── zephyr                                                                          4   0.00%  - 
+│                   └── port                                                                        4   0.00%  - 
+│                       └── bootloader                                                              4   0.00%  - 
+│                           └── bootloader_flash.c                                                  4   0.00%  - 
+│                               └── current_read_mapping                                            4   0.00%  0x3ffb011c .dram0.data
+└── ZEPHYR_BASE                                                                                 12339  11.83%  - 
+    ├── arch                                                                                       28   0.03%  - 
+    │   └── xtensa                                                                                 28   0.03%  - 
+    │       └── core                                                                               28   0.03%  - 
+    │           └── vector_handlers.c                                                              28   0.03%  - 
+    │               └── xtensa_lvl_mask                                                            28   0.03%  0x3ffb0270 .dram0.data
+    ├── drivers                                                                                   166   0.16%  - 
+    │   ├── clock_control                                                                           3   0.00%  - 
+    │   │   ├── clock_control_esp32.c                                                               2   0.00%  - 
+    │   │   │   └── __devstate_dts_ord_43                                                           2   0.00%  0x3ffb1b88 device_states
+    │   │   └── clock_control_esp32_rtc_cntl.c                                                      1   0.00%  - 
+    │   │       └── clock_init_done                                                                 1   0.00%  0x3ffb30c5 .dram0.bss
+    │   ├── gpio                                                                                   61   0.06%  - 
+    │   │   └── gpio_esp32.c                                                                       61   0.06%  - 
+    │   │       ├── __devstate_dts_ord_108                                                          2   0.00%  0x3ffb1b8a device_states
+    │   │       ├── __devstate_dts_ord_8                                                            2   0.00%  0x3ffb1b8c device_states
+    │   │       ├── gpio_config_0                                                                  16   0.02%  0x3ffb0140 .dram0.data
+    │   │       ├── gpio_config_1                                                                  16   0.02%  0x3ffb0130 .dram0.data
+    │   │       ├── gpio_data_0                                                                    12   0.01%  0x3ffb3094 .dram0.bss
+    │   │       ├── gpio_data_1                                                                    12   0.01%  0x3ffb3088 .dram0.bss
+    │   │       └── isr_connected$0                                                                 1   0.00%  0x3ffb30c6 .dram0.bss
+    │   ├── interrupt_controller                                                                    8   0.01%  - 
+    │   │   └── intc_esp32.c                                                                        8   0.01%  - 
+    │   │       ├── non_iram_int_mask                                                               4   0.00%  0x3ffb3080 .dram0.bss
+    │   │       └── vector_desc_head                                                                4   0.00%  0x3ffb3084 .dram0.bss
+    │   ├── serial                                                                                 74   0.07%  - 
+    │   │   └── uart_esp32.c                                                                       74   0.07%  - 
+    │   │       ├── __devstate_dts_ord_78                                                           2   0.00%  0x3ffb1b8e device_states
+    │   │       ├── __pinctrl_dev_config__device_dts_ord_78                                         8   0.01%  0x3ffb0e04 .dram0.data
+    │   │       ├── __pinctrl_state_pins_0__device_dts_ord_78                                      16   0.02%  0x3ffb0e14 .dram0.data
+    │   │       ├── __pinctrl_states__device_dts_ord_78                                             8   0.01%  0x3ffb0e0c .dram0.data
+    │   │       ├── uart_esp32_cfg_port_0                                                          28   0.03%  0x3ffb15d4 .dram0.data
+    │   │       └── uart_esp32_data_0                                                              12   0.01%  0x3ffb0150 .dram0.data
+    │   └── timer                                                                                  20   0.02%  - 
+    │       └── system_timer_generic.h                                                             20   0.02%  - 
+    │           ├── timer_core_last_cycle                                                           8   0.01%  0x3ffb2d10 .dram0.bss
+    │           ├── timer_core_last_elapsed                                                         4   0.00%  0x3ffb30a0 .dram0.bss
+    │           └── timer_core_last_tick                                                            8   0.01%  0x3ffb2d08 .dram0.bss
+    ├── kernel                                                                                  12057  11.56%  - 
+    │   ├── init.c                                                                               7625   7.31%  - 
+    │   │   ├── _kernel                                                                            64   0.06%  0x3ffb2e88 .dram0.bss
+    │   │   ├── levels$0                                                                           24   0.02%  0x3ffb02a0 .dram0.data
+    │   │   ├── z_idle_stacks                                                                    1024   0.98%  0x3ffe9800 .dram0.noinit
+    │   │   ├── z_idle_threads                                                                    184   0.18%  0x3ffb2d18 .dram0.bss
+    │   │   ├── z_interrupt_stacks                                                               2048   1.96%  0x3ffe9000 .dram0.noinit
+    │   │   ├── z_main_stack                                                                     4096   3.93%  0x3ffe9c00 .dram0.noinit
+    │   │   ├── z_main_thread                                                                     184   0.18%  0x3ffb2dd0 .dram0.bss
+    │   │   └── z_sys_post_kernel                                                                   1   0.00%  0x3ffb30c7 .dram0.bss
+    │   ├── mempool.c                                                                            4184   4.01%  - 
+    │   │   ├── _system_heap                                                                       20   0.02%  0x3ffb1b90 k_heap_area
+    │   │   └── kheap__system_heap                                                               4164   3.99%  0x3ffb1ba8 .dram0.bss
+    │   ├── sched.c                                                                               184   0.18%  - 
+    │   │   └── _thread_dummy                                                                     184   0.18%  0x3ffb2ec8 .dram0.bss
+    │   ├── timeout                                                                                 8   0.01%  - 
+    │   │   └── list.h                                                                              8   0.01%  - 
+    │   │       └── timeout_list                                                                    8   0.01%  0x3ffb0160 .dram0.data
+    │   ├── timeout.c                                                                              20   0.02%  - 
+    │   │   ├── announce_remaining                                                                  4   0.00%  0x3ffb30b0 .dram0.bss
+    │   │   ├── announcing_cpu                                                                      4   0.00%  0x3ffb0168 .dram0.data
+    │   │   ├── curr_tick                                                                           8   0.01%  0x3ffb2f98 .dram0.bss
+    │   │   └── inflight_timeout                                                                    4   0.00%  0x3ffb30ac .dram0.bss
+    │   └── timeslicing.c                                                                          36   0.03%  - 
+    │       ├── slice_expired                                                                       4   0.00%  0x3ffb30a4 .dram0.bss
+    │       ├── slice_max_prio                                                                      4   0.00%  0x3ffb30a8 .dram0.bss
+    │       ├── slice_ticks                                                                         4   0.00%  0x3ffb015c .dram0.data
+    │       └── slice_timeouts                                                                     24   0.02%  0x3ffb2f80 .dram0.bss
+    ├── lib                                                                                        36   0.03%  - 
+    │   ├── libc                                                                                   32   0.03%  - 
+    │   │   ├── common                                                                             12   0.01%  - 
+    │   │   │   └── source                                                                         12   0.01%  - 
+    │   │   │       └── stdlib                                                                     12   0.01%  - 
+    │   │   │           └── malloc.c                                                               12   0.01%  - 
+    │   │   │               └── z_malloc_heap                                                      12   0.01%  0x3ffb3074 .dram0.bss
+    │   │   └── picolibc                                                                           20   0.02%  - 
+    │   │       └── stdio.c                                                                        20   0.02%  - 
+    │   │           ├── __stdout                                                                   16   0.02%  0x3ffb0120 .dram0.data
+    │   │           └── _stdout_hook                                                                4   0.00%  0x3ffb3070 .dram0.bss
+    │   └── os                                                                                      4   0.00%  - 
+    │       └── printk.c                                                                            4   0.00%  - 
+    │           └── _char_out                                                                       4   0.00%  0x3ffb00b8 .dram0.data
+    └── soc                                                                                        52   0.05%  - 
+        └── espressif                                                                              52   0.05%  - 
+            └── common                                                                             52   0.05%  - 
+                └── loader.c                                                                       52   0.05%  - 
+                    ├── bootloader_image_hdr                                                       24   0.02%  0x3ffb2fb4 .dram0.bss
+                    ├── libc_heap_size                                                              4   0.00%  0x3ffb02b8 .dram0.data
+                    └── map                                                                        24   0.02%  0x3ffb00bc .dram0.data
+==========================================================================================================================================
+                                                                                               104272

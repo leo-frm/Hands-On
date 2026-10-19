@@ -1,0 +1,68 @@
+mainmenu "Hands-on: eventos no Zephyr"
+
+choice APP_MODE
+    prompt "Mecanismo de tratamento do evento"
+    default APP_MODE_POLLING
+
+config APP_MODE_POLLING
+    bool "A) Polling"
+
+config APP_MODE_IRQ_THREAD
+    bool "B) Interrupcao + thread (semaforo)"
+
+config APP_MODE_WORKQUEUE
+    bool "C) Interrupcao + work queue"
+
+config APP_MODE_ISR_ONLY
+    bool "D) Processamento dentro da ISR (anti-padrao)"
+
+endchoice
+
+config APP_STIMULUS
+    bool "Gerar estimulo automatico (jumper GPIO18 -> GPIO4)"
+    default y
+
+config APP_VERBOSE
+    bool "Imprimir cada evento processado (distorce medicoes)"
+    default n
+
+config APP_HEARTBEAT
+    bool "Thread heartbeat (mede jitter de escalonamento)"
+    default n
+
+config APP_POLL_PERIOD_MS
+    int "Periodo de polling (ms)"
+    default 10
+    range 1 1000
+
+config APP_EVENT_PERIOD_MS
+    int "Periodo entre estimulos (ms) - use valor nao multiplo do polling"
+    default 97
+    range 2 10000
+
+config APP_PULSE_WIDTH_MS
+    int "Largura do pulso de estimulo (ms)"
+    default 20
+    range 1 5000
+
+config APP_NUM_EVENTS
+    int "Numero de eventos medidos"
+    default 200
+
+config APP_WARMUP_EVENTS
+    int "Eventos de aquecimento (descartados)"
+    default 5
+
+config APP_PROCESSING_US
+    int "Carga simulada por evento (us, busy-wait)"
+    default 0
+
+config APP_WORKER_PRIORITY
+    int "Prioridade da thread worker / polling"
+    default 1
+
+config APP_MAIN_PRIORITY
+    int "Prioridade da main (gera o estimulo)"
+    default 5
+
+source "Kconfig.zephyr"

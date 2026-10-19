@@ -1,0 +1,150 @@
+# ORIGEM: execucao EMULADA - firmware real (west build, esp32_devkitc) rodando no
+#         QEMU da Espressif com modelo de GPIO estendido; NAO e medicao em placa fisica.
+# Experimento: exp1-3_polling_manual | execucao 1
+# Configuracao: -DCONFIG_APP_MODE_POLLING=y -DCONFIG_APP_STIMULUS=n -DCONFIG_APP_VERBOSE=y
+# Emulador: -icount shift=2 (4 ns/instrucao) | GPIO: btn-count=25, btn-short-every=5, btn-short-ms=4
+
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x12 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3ffb0000,len:7076
+load:0x40080000,len:35040
+ho 0 tail 12 room 4
+load:0x50000000,len:40
+entry 0x40083c60
+I (soc_init): ESP Simple boot
+I (soc_init): compile time Oct 19 2026 13:26:24
+W (soc_init): Unicore bootloader
+I (soc_init): chip revision: v0.0
+E (soc_init): You are using ESP32 chip revision (0) that is unsupported. While it may work, it could cause unexpected behavior or issues.
+E (soc_init): Proceeding with this ESP32 chip revision is not recommended unless you fully understand the potential risk and limitations.
+I (flash_init): SPI Speed      : 40MHz
+I (flash_init): SPI Mode       : DIO
+I (flash_init): SPI Flash Size : 4MB
+I (boot): DRAM	: lma=00001020h vma=3ffb0000h size=01ba4h (  7076)
+I (boot): IRAM	: lma=00002bcch vma=40080000h size=088e0h ( 35040)
+I (boot): RTC_DATA	: lma=0000b4b4h vma=50000000h size=00028h (    40)
+I (boot): IROM	: lma=00010000h vma=400d0000h size=036e0h ( 14048)
+I (boot): DROM	: lma=00020000h vma=3f400000h size=10000h ( 65536)
+I (boot): libc heap size 179 kB.
+I (spi_flash): detected chip: gd
+I (spi_flash): flash io: dio
+*** Booting Zephyr OS build 03b1ebca3343 ***
+
+*** Hands-on eventos | modo: polling ***
+hw cycles/s = 240000000  | tick = 1000 Hz
+evento processado #1
+evento processado #2
+evento processado #3
+evento processado #4
+evento processado #5
+evento processado #6
+[status] eventos processados = 6
+Thread analyze:
+ poll                : STACK: unused  448 usage  576 / 1024 ( 56 %); CPU:   0 %
+                     : Total CPU cycles used: 556395
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 2398874916
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 66708
+ ISR0                : STACK: unused 1696 usage  352 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+evento processado #7
+evento processado #8
+evento processado #9
+evento processado #10
+evento processado #11
+evento processado #12
+evento processado #13
+evento processado #14
+evento processado #15
+[status] eventos processados = 15
+Thread analyze:
+ poll                : STACK: unused  448 usage  576 / 1024 ( 56 %); CPU:   0 %
+                     : Total CPU cycles used: 1118452
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 4797873353
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 151447
+ ISR0                : STACK: unused 1696 usage  352 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+evento processado #16
+evento processado #17
+evento processado #18
+evento processado #19
+evento processado #20
+evento processado #21
+evento processado #22
+[status] eventos processados = 22
+Thread analyze:
+ poll                : STACK: unused  448 usage  576 / 1024 ( 56 %); CPU:   0 %
+                     : Total CPU cycles used: 1676603
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 7196875376
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 236284
+ ISR0                : STACK: unused 1696 usage  352 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 22
+Thread analyze:
+ poll                : STACK: unused  448 usage  576 / 1024 ( 56 %); CPU:   0 %
+                     : Total CPU cycles used: 2219400
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 9595892640
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 321121
+ ISR0                : STACK: unused 1696 usage  352 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 22
+Thread analyze:
+ poll                : STACK: unused  448 usage  576 / 1024 ( 56 %); CPU:   0 %
+                     : Total CPU cycles used: 2762271
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 11994909795
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 406100
+ ISR0                : STACK: unused 1696 usage  352 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 22
+Thread analyze:
+ poll                : STACK: unused  448 usage  576 / 1024 ( 56 %); CPU:   0 %
+                     : Total CPU cycles used: 3306282
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 14393925647
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 491079
+ ISR0                : STACK: unused 1696 usage  352 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 22
+Thread analyze:
+ poll                : STACK: unused  448 usage  576 / 1024 ( 56 %); CPU:   0 %
+                     : Total CPU cycles used: 3849061
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 16792942795
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 576043
+ ISR0                : STACK: unused 1696 usage  352 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 22
+Thread analyze:
+ poll                : STACK: unused  448 usage  576 / 1024 ( 56 %); CPU:   0 %
+                     : Total CPU cycles used: 4392218
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 19191959957
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 661003
+ ISR0                : STACK: unused 1696 usage  352 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0
+[status] eventos processados = 22
+Thread analyze:
+ poll                : STACK: unused  448 usage  576 / 1024 ( 56 %); CPU:   0 %
+                     : Total CPU cycles used: 4935015
+ idle                : STACK: unused  816 usage  208 / 1024 ( 20 %); CPU:  99 %
+                     : Total CPU cycles used: 21590977552
+ main                : STACK: unused 3168 usage  928 / 4096 ( 22 %); CPU:   0 %
+                     : Total CPU cycles used: 745982
+ ISR0                : STACK: unused 1696 usage  352 / 2048 ( 17 %); CPU:   0 %
+                     : Total CPU cycles used: 0

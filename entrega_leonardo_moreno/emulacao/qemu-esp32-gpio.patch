@@ -1,0 +1,388 @@
+diff --git a/hw/gpio/esp32_gpio.c b/hw/gpio/esp32_gpio.c
+index 4fea1f5..9adb1f8 100644
+--- a/hw/gpio/esp32_gpio.c
++++ b/hw/gpio/esp32_gpio.c
+@@ -3,6 +3,10 @@
+  *
+  * Copyright (c) 2019 Espressif Systems (Shanghai) Co. Ltd.
+  *
++ * Extended for the Zephyr event-handling lab: output/enable/input registers,
++ * edge and level interrupts routed to the interrupt matrix, a jumper between
++ * two pads and a scripted push button.
++ *
+  * This program is free software; you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License version 2 or
+  * (at your option) any later version.
+@@ -19,40 +23,239 @@
+ #include "hw/qdev-properties.h"
+ #include "hw/gpio/esp32_gpio.h"
+ 
++enum {
++    INT_DISABLE = 0,
++    INT_POSEDGE = 1,
++    INT_NEGEDGE = 2,
++    INT_ANYEDGE = 3,
++    INT_LOW_LEVEL = 4,
++    INT_HIGH_LEVEL = 5,
++};
++
++static uint32_t esp32_gpio_pad_levels(Esp32GpioState *s)
++{
++    uint32_t level = (s->out & s->enable) | (s->ext_level & ~s->enable);
++
++    if (s->jumper_src >= 0 && s->jumper_dst >= 0 &&
++        (s->enable & BIT(s->jumper_src)) && !(s->enable & BIT(s->jumper_dst))) {
++        level &= ~BIT(s->jumper_dst);
++        level |= ((s->out >> s->jumper_src) & 1) << s->jumper_dst;
++    }
++    if (s->button_pressed && s->btn_pin >= 0 && !(s->enable & BIT(s->btn_pin))) {
++        level &= ~BIT(s->btn_pin);   /* button to GND, active low */
++    }
++    return level;
++}
++
++static uint32_t esp32_gpio_int_mask(Esp32GpioState *s, uint32_t ena_bit)
++{
++    uint32_t mask = 0;
+ 
++    for (int i = 0; i < 32; i++) {
++        if (FIELD_EX32(s->pin[i], GPIO_PIN0, INT_ENA) & ena_bit) {
++            mask |= BIT(i);
++        }
++    }
++    return mask;
++}
++
++static void esp32_gpio_update(Esp32GpioState *s)
++{
++    uint32_t new_in = esp32_gpio_pad_levels(s);
++    uint32_t changed = new_in ^ s->in;
++
++    for (int i = 0; i < 32; i++) {
++        uint32_t bit = BIT(i);
++        bool hi = new_in & bit;
++
++        switch (FIELD_EX32(s->pin[i], GPIO_PIN0, INT_TYPE)) {
++        case INT_POSEDGE:
++            if ((changed & bit) && hi) {
++                s->status |= bit;
++            }
++            break;
++        case INT_NEGEDGE:
++            if ((changed & bit) && !hi) {
++                s->status |= bit;
++            }
++            break;
++        case INT_ANYEDGE:
++            if (changed & bit) {
++                s->status |= bit;
++            }
++            break;
++        case INT_LOW_LEVEL:
++            if (!hi) {
++                s->status |= bit;
++            }
++            break;
++        case INT_HIGH_LEVEL:
++            if (hi) {
++                s->status |= bit;
++            }
++            break;
++        default:
++            break;
++        }
++    }
++
++    if (s->trace && (changed & s->trace_mask)) {
++        int64_t now = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
++        for (int i = 0; i < 32; i++) {
++            if (changed & s->trace_mask & BIT(i)) {
++                fprintf(s->trace, "%" PRId64 ",%d,%d\n", now, i, (new_in >> i) & 1);
++            }
++        }
++    }
++
++    s->in = new_in;
++    qemu_set_irq(s->irq, (s->status & esp32_gpio_int_mask(s, ESP32_GPIO_INT_ENA_PRO)) != 0);
++}
+ 
+ static uint64_t esp32_gpio_read(void *opaque, hwaddr addr, unsigned int size)
+ {
+     Esp32GpioState *s = ESP32_GPIO(opaque);
+-    uint64_t r = 0;
++
+     switch (addr) {
+     case A_GPIO_STRAP:
+-        r = s->strap_mode;
+-        break;
+-
++        return s->strap_mode;
++    case A_GPIO_OUT:
++        return s->out;
++    case A_GPIO_ENABLE:
++        return s->enable;
++    case A_GPIO_IN:
++        return s->in;
++    case A_GPIO_STATUS:
++        return s->status;
++    case A_GPIO_PCPU_INT:
++        return s->status & esp32_gpio_int_mask(s, ESP32_GPIO_INT_ENA_PRO);
++    case A_GPIO_ACPU_INT:
++        return s->status & esp32_gpio_int_mask(s, ESP32_GPIO_INT_ENA_APP);
+     default:
+-        break;
++        if (addr >= A_GPIO_PIN0 && addr < A_GPIO_PIN0 + 4 * ESP32_GPIO_PINS) {
++            return s->pin[(addr - A_GPIO_PIN0) / 4];
++        }
++        return (addr / 4 < ARRAY_SIZE(s->misc)) ? s->misc[addr / 4] : 0;
+     }
+-    return r;
+ }
+ 
+ static void esp32_gpio_write(void *opaque, hwaddr addr,
+-                       uint64_t value, unsigned int size)
++                             uint64_t value, unsigned int size)
+ {
++    Esp32GpioState *s = ESP32_GPIO(opaque);
++
++    switch (addr) {
++    case A_GPIO_OUT:
++        s->out = value;
++        break;
++    case A_GPIO_OUT_W1TS:
++        s->out |= value;
++        break;
++    case A_GPIO_OUT_W1TC:
++        s->out &= ~value;
++        break;
++    case A_GPIO_ENABLE:
++        s->enable = value;
++        break;
++    case A_GPIO_ENABLE_W1TS:
++        s->enable |= value;
++        break;
++    case A_GPIO_ENABLE_W1TC:
++        s->enable &= ~value;
++        break;
++    case A_GPIO_STATUS:
++        s->status = value;
++        break;
++    case A_GPIO_STATUS_W1TS:
++        s->status |= value;
++        break;
++    case A_GPIO_STATUS_W1TC:
++        s->status &= ~value;
++        break;
++    default:
++        if (addr >= A_GPIO_PIN0 && addr < A_GPIO_PIN0 + 4 * ESP32_GPIO_PINS) {
++            s->pin[(addr - A_GPIO_PIN0) / 4] = value;
++        } else if (addr / 4 < ARRAY_SIZE(s->misc)) {
++            s->misc[addr / 4] = value;
++        }
++        return;
++    }
++    esp32_gpio_update(s);
+ }
+ 
+-static const MemoryRegionOps uart_ops = {
++static const MemoryRegionOps gpio_ops = {
+     .read =  esp32_gpio_read,
+     .write = esp32_gpio_write,
+     .endianness = DEVICE_LITTLE_ENDIAN,
+ };
+ 
++/* xorshift64*: deterministic press schedule for a given seed */
++static uint32_t esp32_gpio_rand(Esp32GpioState *s, uint32_t lo, uint32_t hi)
++{
++    s->rng ^= s->rng >> 12;
++    s->rng ^= s->rng << 25;
++    s->rng ^= s->rng >> 27;
++    uint64_t r = s->rng * 0x2545F4914F6CDD1DULL;
++    return hi > lo ? lo + (uint32_t)((r >> 32) % (hi - lo + 1)) : lo;
++}
++
++static void esp32_gpio_btn_tick(void *opaque)
++{
++    Esp32GpioState *s = ESP32_GPIO(opaque);
++    int64_t now = qemu_clock_get_ms(QEMU_CLOCK_VIRTUAL);
++    uint32_t next_ms;
++
++    if (!s->button_pressed) {
++        if (s->btn_done >= s->btn_count) {
++            return;
++        }
++        s->btn_done++;
++        s->button_pressed = true;
++        if (s->btn_short_every && (s->btn_done % s->btn_short_every) == 0) {
++            next_ms = s->btn_short_ms;
++        } else {
++            next_ms = esp32_gpio_rand(s, s->btn_width_min_ms, s->btn_width_max_ms);
++        }
++    } else {
++        s->button_pressed = false;
++        next_ms = esp32_gpio_rand(s, s->btn_gap_min_ms, s->btn_gap_max_ms);
++    }
++    esp32_gpio_update(s);
++    timer_mod(s->btn_timer, now + next_ms);
++}
++
+ static void esp32_gpio_reset_hold(Object *obj, ResetType type)
+ {
++    Esp32GpioState *s = ESP32_GPIO(obj);
++
++    s->out = 0;
++    s->enable = 0;
++    s->status = 0;
++    memset(s->pin, 0, sizeof(s->pin));
++    memset(s->misc, 0, sizeof(s->misc));
++    s->button_pressed = false;
++    s->btn_done = 0;
++    s->rng = s->btn_seed ? s->btn_seed : 0x9E3779B97F4A7C15ULL;
++    s->in = esp32_gpio_pad_levels(s);
++    if (s->btn_timer && s->btn_count) {
++        timer_mod(s->btn_timer, qemu_clock_get_ms(QEMU_CLOCK_VIRTUAL) + s->btn_start_ms);
++    }
+ }
+ 
+ static void esp32_gpio_realize(DeviceState *dev, Error **errp)
+ {
++    Esp32GpioState *s = ESP32_GPIO(dev);
++
++    s->btn_timer = timer_new_ms(QEMU_CLOCK_VIRTUAL, esp32_gpio_btn_tick, s);
++    if (s->trace_path && *s->trace_path) {
++        s->trace = fopen(s->trace_path, "w");
++        if (!s->trace) {
++            error_setg(errp, "esp32.gpio: cannot open trace file %s", s->trace_path);
++            return;
++        }
++        setvbuf(s->trace, NULL, _IOLBF, 0);
++        fprintf(s->trace, "t_ns,gpio,level\n");
++    }
+ }
+ 
+ static void esp32_gpio_init(Object *obj)
+@@ -63,7 +266,7 @@ static void esp32_gpio_init(Object *obj)
+     /* Set the default value for the strap_mode property */
+     object_property_set_int(obj, "strap_mode", ESP32_STRAP_MODE_FLASH_BOOT, &error_fatal);
+ 
+-    memory_region_init_io(&s->iomem, obj, &uart_ops, s,
++    memory_region_init_io(&s->iomem, obj, &gpio_ops, s,
+                           TYPE_ESP32_GPIO, 0x1000);
+     sysbus_init_mmio(sbd, &s->iomem);
+     sysbus_init_irq(sbd, &s->irq);
+@@ -73,6 +276,21 @@ static Property esp32_gpio_properties[] = {
+     /* The strap_mode needs to be explicitly set in the instance init, thus, set
+      * the default value to 0. */
+     DEFINE_PROP_UINT32("strap_mode", Esp32GpioState, strap_mode, 0),
++    DEFINE_PROP_UINT32("ext-level", Esp32GpioState, ext_level, 0xFFFFFFFF),
++    DEFINE_PROP_INT32("jumper-src", Esp32GpioState, jumper_src, -1),
++    DEFINE_PROP_INT32("jumper-dst", Esp32GpioState, jumper_dst, -1),
++    DEFINE_PROP_INT32("btn-pin", Esp32GpioState, btn_pin, 4),
++    DEFINE_PROP_UINT32("btn-count", Esp32GpioState, btn_count, 0),
++    DEFINE_PROP_UINT32("btn-start-ms", Esp32GpioState, btn_start_ms, 2000),
++    DEFINE_PROP_UINT32("btn-gap-min-ms", Esp32GpioState, btn_gap_min_ms, 400),
++    DEFINE_PROP_UINT32("btn-gap-max-ms", Esp32GpioState, btn_gap_max_ms, 1500),
++    DEFINE_PROP_UINT32("btn-width-min-ms", Esp32GpioState, btn_width_min_ms, 80),
++    DEFINE_PROP_UINT32("btn-width-max-ms", Esp32GpioState, btn_width_max_ms, 220),
++    DEFINE_PROP_UINT32("btn-short-every", Esp32GpioState, btn_short_every, 0),
++    DEFINE_PROP_UINT32("btn-short-ms", Esp32GpioState, btn_short_ms, 4),
++    DEFINE_PROP_UINT32("btn-seed", Esp32GpioState, btn_seed, 1),
++    DEFINE_PROP_STRING("trace", Esp32GpioState, trace_path),
++    DEFINE_PROP_UINT32("trace-mask", Esp32GpioState, trace_mask, 0xFFFFFFFF),
+     DEFINE_PROP_END_OF_LIST(),
+ };
+ 
+diff --git a/hw/xtensa/esp32.c b/hw/xtensa/esp32.c
+index e000470..7491d9c 100644
+--- a/hw/xtensa/esp32.c
++++ b/hw/xtensa/esp32.c
+@@ -414,6 +414,8 @@ static void esp32_soc_realize(DeviceState *dev, Error **errp)
+ 
+     qdev_realize(DEVICE(&s->gpio), &s->periph_bus, &error_fatal);
+     esp32_soc_add_periph_device(sys_mem, &s->gpio, DR_REG_GPIO_BASE);
++    sysbus_connect_irq(SYS_BUS_DEVICE(&s->gpio), 0,
++                       qdev_get_gpio_in(intmatrix_dev, ETS_GPIO_INTR_SOURCE));
+ 
+     for (int i = 0; i < ESP32_UART_COUNT; ++i) {
+         const hwaddr uart_base[] = {DR_REG_UART_BASE, DR_REG_UART1_BASE, DR_REG_UART2_BASE};
+diff --git a/include/hw/gpio/esp32_gpio.h b/include/hw/gpio/esp32_gpio.h
+index 163b41a..99481dd 100644
+--- a/include/hw/gpio/esp32_gpio.h
++++ b/include/hw/gpio/esp32_gpio.h
+@@ -3,13 +3,33 @@
+ #include "hw/sysbus.h"
+ #include "hw/hw.h"
+ #include "hw/registerfields.h"
++#include "qemu/timer.h"
+ 
+ #define TYPE_ESP32_GPIO "esp32.gpio"
+ #define ESP32_GPIO(obj)             OBJECT_CHECK(Esp32GpioState, (obj), TYPE_ESP32_GPIO)
+ #define ESP32_GPIO_GET_CLASS(obj)   OBJECT_GET_CLASS(Esp32GpioClass, obj, TYPE_ESP32_GPIO)
+ #define ESP32_GPIO_CLASS(klass)     OBJECT_CLASS_CHECK(Esp32GpioClass, klass, TYPE_ESP32_GPIO)
+ 
++REG32(GPIO_OUT, 0x0004)
++REG32(GPIO_OUT_W1TS, 0x0008)
++REG32(GPIO_OUT_W1TC, 0x000C)
++REG32(GPIO_ENABLE, 0x0020)
++REG32(GPIO_ENABLE_W1TS, 0x0024)
++REG32(GPIO_ENABLE_W1TC, 0x0028)
+ REG32(GPIO_STRAP, 0x0038)
++REG32(GPIO_IN, 0x003C)
++REG32(GPIO_STATUS, 0x0044)
++REG32(GPIO_STATUS_W1TS, 0x0048)
++REG32(GPIO_STATUS_W1TC, 0x004C)
++REG32(GPIO_ACPU_INT, 0x0060)
++REG32(GPIO_PCPU_INT, 0x0068)
++REG32(GPIO_PIN0, 0x0088)
++    FIELD(GPIO_PIN0, INT_TYPE, 7, 3)
++    FIELD(GPIO_PIN0, INT_ENA, 13, 5)
++
++#define ESP32_GPIO_PINS         40
++#define ESP32_GPIO_INT_ENA_APP  (1 << 0)
++#define ESP32_GPIO_INT_ENA_PRO  (1 << 2)
+ 
+ #define ESP32_STRAP_MODE_FLASH_BOOT 0x12
+ #define ESP32_STRAP_MODE_UART_BOOT  0x0f
+@@ -20,6 +40,42 @@ typedef struct Esp32GpioState {
+     MemoryRegion iomem;
+     qemu_irq irq;
+     uint32_t strap_mode;
++
++    /* GPIO0~31 state; other registers are stored but have no side effects */
++    uint32_t out;
++    uint32_t enable;
++    uint32_t status;
++    uint32_t in;
++    uint32_t pin[ESP32_GPIO_PINS];
++    uint32_t misc[0x400];
++
++    /* Level of undriven pads (internal pull-ups) and the push button */
++    uint32_t ext_level;
++    bool button_pressed;
++
++    /* Bench wiring: jumper from an output pad to an input pad (-1 = none) */
++    int32_t jumper_src;
++    int32_t jumper_dst;
++
++    /* Scripted presses of the push button (manual-mode experiments) */
++    int32_t btn_pin;
++    uint32_t btn_count;
++    uint32_t btn_start_ms;
++    uint32_t btn_gap_min_ms;
++    uint32_t btn_gap_max_ms;
++    uint32_t btn_width_min_ms;
++    uint32_t btn_width_max_ms;
++    uint32_t btn_short_every;
++    uint32_t btn_short_ms;
++    uint32_t btn_seed;
++    uint32_t btn_done;
++    uint64_t rng;
++    QEMUTimer *btn_timer;
++
++    /* Optional pad-level trace in virtual time (logic-analyzer view) */
++    char *trace_path;
++    uint32_t trace_mask;
++    FILE *trace;
+ } Esp32GpioState;
+ 
+ typedef struct Esp32GpioClass {

@@ -13,6 +13,7 @@ entrega_leonardo_moreno/
 ├── logs/                      logs brutos (linhas CSV), saídas do build, ram/rom_report, registro dos pinos
 ├── resultados.xlsx            dados extraídos dos logs, tabelas da apostila e gráficos
 ├── relatorio.pdf              relatório (estrutura da seção 19.2)
+├── relatorio.docx             o mesmo relatório em Word
 └── emulacao/                  ferramentas de execução e análise
 ```
 
@@ -28,6 +29,10 @@ git apply emulacao/qemu-esp32-gpio.patch && ./configure --target-list=xtensa-sof
 python3 emulacao/run_lab.py exp4          # ou exp1-3, exp5, exp6, exp7, exp8
 # 3) planilha, figuras e relatório
 python3 emulacao/analisar.py && python3 emulacao/figuras.py && python3 emulacao/gerar_relatorio.py
+# 4) .docx a partir do HTML do relatório
+pandoc relatorio.html -t docx --reference-doc=emulacao/modelo_docx.docx \
+       --lua-filter=emulacao/filtro_docx.lua -o bruto.docx
+python3 emulacao/pos_processar_docx.py bruto.docx relatorio.docx
 ```
 
 Em uma placa, os mesmos projetos são compilados e gravados com `west build` e `west flash`.

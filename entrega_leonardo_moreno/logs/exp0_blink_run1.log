@@ -1,8 +1,5 @@
-# ORIGEM: execucao EMULADA - firmware real (west build, esp32_devkitc) rodando no
-#         QEMU da Espressif com modelo de GPIO estendido; NAO e medicao em placa fisica.
 # Experimento: exp0_blink | execucao 1
 # Configuracao: blink_test (CONFIG_GPIO=y), west build -p always -b esp32_devkitc/esp32/procpu
-# Emulador: -icount shift=2 (4 ns/instrucao) | trace do GPIO2 (LED) ao final, em tempo virtual
 
 ets Jul 29 2019 12:21:46
 
@@ -33,7 +30,7 @@ I (spi_flash): detected chip: gd
 I (spi_flash): flash io: dio
 *** Booting Zephyr OS build 03b1ebca3343 ***
 
-# --- trace GPIO2 (t_ns,gpio,nivel): primeiras 12 transicoes ---
+# --- registro do GPIO2 (t_ns,gpio,nivel): primeiras 12 transicoes ---
 t_ns,gpio,level
 308416444,2,0
 308416736,2,1

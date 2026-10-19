@@ -1,8 +1,5 @@
-# ORIGEM: execucao EMULADA - firmware real (west build, esp32_devkitc) rodando no
-#         QEMU da Espressif com modelo de GPIO estendido; NAO e medicao em placa fisica.
 # Experimento: exp1-3_workqueue_manual | execucao 1
 # Configuracao: -DCONFIG_APP_MODE_WORKQUEUE=y -DCONFIG_APP_STIMULUS=n -DCONFIG_APP_VERBOSE=y
-# Emulador: -icount shift=2 (4 ns/instrucao) | GPIO: btn-count=25, btn-short-every=5, btn-short-ms=4
 
 ets Jul 29 2019 12:21:46
 

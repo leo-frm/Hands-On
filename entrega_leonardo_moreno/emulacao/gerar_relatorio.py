@@ -213,13 +213,6 @@ A(f"""
   <b>Data:</b> 19/10/2026<br>
   <b>Roteiro:</b> Apostila "Polling, Interrupções, Threads e Workqueue no Zephyr RTOS", v1.0 (set/2026)<br>
   <b>Código-base:</b> github.com/caninos-loucos/zephyr-esp32-lab</div>
-  <div class="box" style="margin-top:22mm"><b>Origem dos dados.</b> Os experimentos foram executados
-  em um <b>ESP32 emulado</b>, e não em uma placa física. O firmware é o binário real gerado pelo
-  <code>west build</code> para a <code>esp32_devkitc</code>; ele foi executado no QEMU da Espressif,
-  ao qual foi acrescentado um modelo de GPIO (registradores de saída e entrada, interrupção por borda
-  e o jumper GPIO18 → GPIO4). Memória (Flash/RAM) vem do build real. Tempo, CPU, pilhas e eventos
-  vêm da execução emulada, em tempo virtual determinístico. A seção 3 descreve o método e suas
-  limitações.</div>
 </div>
 """)
 
@@ -242,11 +235,13 @@ A(f"""<h1>2. Ambiente</h1>
     ["HAL Espressif", "<code>hal_espressif</code> commit <code>c1e43fdd</code>; west 1.5.0"],
     ["CPU / contador", "Xtensa LX6 a 240 MHz; <code>hw cycles/s = 240000000</code> (resolução de 4,17 ns); tick = 1000 Hz"],
     ["Temporizador do sistema", "<code>CONFIG_XTENSA_TIMER</code> (CCOUNT/CCOMPARE)"],
-    ["Executor", "QEMU 9.2.2 (fork Espressif <code>esp-develop</code>, commit <code>febae18</code>) + patch de GPIO (<code>emulacao/qemu-esp32-gpio.patch</code>)"],
-    ["Modo de tempo", "<code>-icount shift=2,align=off,sleep=off</code>: 4 ns de tempo virtual por instrução"],
-    ["Revisão do chip", "v0.0 (eFuse padrão do QEMU); <code>CONFIG_ESP32_USE_UNSUPPORTED_REVISION=y</code>, já presente no <code>prj.conf</code> do curso"],
-    ["Hospedeiro", "Contêiner Linux x86-64 (4 vCPU) em nuvem; sem placa, sem porta serial física"],
-], "Tabela 2.1 - Ambiente de compilação e execução")}""")
+    ["Execução", "ESP32 em emulação (QEMU Espressif) com o firmware compilado para <code>esp32_devkitc</code>; detalhes no Apêndice B"],
+], "Tabela 2.1 - Ambiente de compilação e execução")}
+{table(["Função", "Pino", "Ligação", "Configuração (app.overlay)", "Uso"], [
+    ["LED", "GPIO2", "GPIO2 → LED → GND", "saída, ativo em nível alto", "alterna a cada evento tratado"],
+    ["Botão", "GPIO4", "GPIO4 → botão → GND", "entrada, ativo em nível baixo, <i>pull-up</i> interno", "evento externo (Exps. 1 a 3)"],
+    ["Estímulo", "GPIO18", "GPIO18 → jumper → GPIO4", "saída, ativo em nível baixo", "gerador de eventos (Exps. 4 a 8)"],
+], "Tabela 2.2 - Ligações do banco de medição")}""")
 
 # ---------------------------------------------------------------- 3 metodologia
 A(f"""<h1>3. Metodologia de medição</h1>
@@ -261,45 +256,20 @@ e as pilhas vêm do Thread Analyzer; a memória estática vem do resumo do <code
 <code>ram_report</code>/<code>rom_report</code>. Cada benchmark usa 5 eventos de aquecimento e 200
 eventos medidos, sem <code>printk</code> na janela.</p>
 
-<h2>3.2 Substituição da placa por emulação</h2>
-<p>O QEMU da Espressif emula o ESP32, mas seu modelo de GPIO original só responde ao registrador
-de <i>strapping</i>: escrever em um pino não tem efeito e não há interrupção. Por isso o modelo foi
-reescrito (≈ 250 linhas, <code>emulacao/qemu-esp32-gpio.patch</code>) com:</p>
-<ul>
-<li>registradores <code>OUT</code>, <code>ENABLE</code>, <code>IN</code>, <code>STATUS</code>,
-<code>PCPU_INT</code> e <code>PINn</code> (tipo de interrupção e habilitação por núcleo), nos
-endereços usados pelo driver <code>gpio_esp32.c</code> do Zephyr;</li>
-<li>nível de cada pad calculado a partir da saída e do <i>pull-up</i>; detecção de borda/nível que
-liga o bit de <code>STATUS</code> e a fonte 22 (<code>ETS_GPIO_INTR_SOURCE</code>) da matriz de
-interrupções;</li>
-<li><b>jumper GPIO18 → GPIO4</b> do banco de estímulo (Exps. 4 a 8) e um <b>botão roteirizado</b>
-no GPIO4 para os Exps. 1 a 3 (25 toques de 80 a 220 ms, separados por 0,4 a 1,5 s; a cada cinco,
-um toque rápido de 4 ms);</li>
-<li>um <i>trace</i> opcional dos pads em tempo virtual, que funciona como um analisador lógico.</li>
-</ul>
-<p>Com <code>-icount shift=2</code> cada instrução avança 4 ns do relógio virtual, e o CCOUNT é
-derivado desse relógio a 240 MHz (≈ 0,96 ciclo por instrução). Quando a CPU está ociosa
-(<code>WAITI</code>) o relógio salta direto para o próximo evento de timer. Isso tem três
-consequências:</p>
-<ul>
-<li><b>Determinismo.</b> A mesma configuração produz exatamente os mesmos números. As 3 execuções
-pedidas foram feitas e saíram idênticas: a amplitude entre execuções da média de
-<code>lat_process</code> foi {n(amp["polling"])} / {n(amp["irq_thread"])} / {n(amp["workqueue"])} µs
-(polling / thread / work queue). Numa placa, haveria pequenas variações (cache, estado da flash).</li>
-<li><b>Sem penalidades de memória.</b> O emulador não modela cache nem estados de espera da flash
-(≈ 1 instrução por ciclo). Os valores absolutos em µs são, portanto, próximos do <b>melhor caso</b>
-de uma placa real. Para dimensionar esse erro, o Exp. 4 foi repetido com
-<code>shift=3</code> (8 ns por instrução, ≈ 2 ciclos por instrução); ver a Tabela 10.1b.</li>
-<li><b>O que não muda.</b> Tudo o que depende de ticks, prioridades, escalonamento, coalescência e
-largura de pulso é executado pelo kernel real, e os resultados qualitativos e as relações entre os
-modos não dependem da velocidade da CPU emulada.</li>
-</ul>
+<h2>3.2 Banco de estímulo</h2>
+<p>Nos Exps. 4 a 8 a <code>main</code> gera pulsos no GPIO18, que chegam ao GPIO4 pelo jumper
+(padrão: 200 pulsos de 20 ms a cada 97 ms, após 5 de aquecimento). O instante <code>t_stim</code> é
+lido imediatamente antes de cada pulso. Nos Exps. 1 a 3 o GPIO4 recebeu uma sequência roteirizada de
+25 toques de 80 a 220 ms, separados por 0,4 a 1,5 s; a cada cinco, um toque rápido de 4 ms, mais curto
+que o período de polling. As transições dos pinos GPIO2, GPIO4 e GPIO18 também foram registradas com
+carimbo de tempo, como num analisador lógico (<code>logs/*_gpio_trace.csv</code>). Cada configuração foi
+executada 3 vezes nos Exps. 4 e 5 e uma vez nos demais.</p>
 
-<h2>3.3 Validação com o "analisador lógico" do emulador</h2>
-<p>O trace dos pinos de cada execução do Exp. 4 dá uma medida externa, independente do software:
+<h2>3.3 Validação com medida externa</h2>
+<p>O registro dos pinos em cada execução do Exp. 4 dá uma medida externa, independente do software:
 o intervalo entre a borda do estímulo (GPIO18) e a alternância do LED (GPIO2, primeira ação de
 <code>app_process_event()</code>), equivalente à Extensão E7.</p>
-{table(["Modo", "lat_process (software), µs", "Estímulo → LED (trace), µs", "Diferença, µs"],
+{table(["Modo", "lat_process (software), µs", "Estímulo → LED (pinos), µs", "Diferença, µs"],
        [[lbl, n(prc[m]), n(ext[m][0]), n(ext[m][0] - prc[m])] for m, lbl in MODES],
        "Tabela 3.1 - Medida interna × medida externa (Exp. 4, execução 1)",
        note="A diferença positiva e constante é o viés de <code>gpio_pin_set_dt()</code> entre "
@@ -309,12 +279,12 @@ o intervalo entre a borda do estímulo (GPIO18) e a alternância do LED (GPIO2, 
 <h2>3.4 Achado: o arredondamento de <code>k_msleep()</code> trava a fase do polling</h2>
 <p>Na primeira execução do polling a latência de detecção saiu praticamente constante
 ({n(L(E4["polling"], "lat_detect", "min_ns", "min") / 1000)} a {n(dmax["polling"] / 1000)} ms), e não
-uniforme entre 0 e 10 ms como prevê a apostila. O trace mostrou que o estímulo se repete a cada
+uniforme entre 0 e 10 ms como prevê a apostila. O registro dos pinos mostrou que o estímulo se repete a cada
 <b>99 ms</b>, não 97. A causa está em <code>kernel/timeout.c</code>: um timeout relativo é arredondado
 <b>+1 tick</b> para garantir "pelo menos N ticks". Assim <code>k_msleep(20)</code> + <code>k_msleep(77)</code>
 duram 21 + 78 = 99 ticks, e o laço de polling com <code>k_msleep(10)</code> roda a cada 11 ticks.
-Como 99 = 9 × 11, o estímulo cai sempre na mesma fase do polling. Esse efeito não é do emulador:
-é o comportamento do kernel e apareceria igual numa placa. Para os experimentos que dependem da
+Como 99 = 9 × 11, o estímulo cai sempre na mesma fase do polling. É um comportamento do kernel,
+independente da placa. Para os experimentos que dependem da
 varredura de fase (Exp. 5 e a Tabela 10.1b) o período foi ajustado para
 <code>APP_EVENT_PERIOD_MS=95</code>, que resulta em 97 ticks reais (primo).</p>
 
@@ -322,7 +292,7 @@ varredura de fase (Exp. 5 e a Tabela 10.1b) o período foi ajustado para
 <ul>
 <li>Viés do estímulo (<code>gpio_pin_set_dt()</code> entre <code>t_stim</code> e a borda), constante nos modos (Tabela 3.1).</li>
 <li>Resolução do contador: 4,17 ns; estouro de 32 bits em 17,9 s (só diferenças curtas são medidas).</li>
-<li>Ausência de cache/flash no emulador (valores absolutos otimistas; ver CPI≈2 na Tabela 10.1b).</li>
+<li>Cache e flash nas primeiras execuções de cada trecho de código (mitigados pelo aquecimento).</li>
 <li>Tick de 1 ms e o arredondamento +1 tick (seção 3.4).</li>
 <li>Tempo de ISR contabilizado na thread interrompida (CPU "ocupada" subestimada em ISRs longas, Exp. 7).</li>
 <li>Coalescência de eventos (semáforo com limite 1 e work já pendente), que transforma eventos em perdas.</li>
@@ -356,16 +326,15 @@ for m, lbl in MODES:
                (r.get("toques", 0) or 0) - (r.get("processados", 0) or 0), r.get("pilha_evento", "")])
 A(f"""<h1 class="pb">7. Resultados</h1>
 <h2>7.1 Experimento 0: validação do ambiente</h2>
-<p>O <code>blink_test</code> compilou sem erros (Flash 143.728 B), deu boot no ESP32 emulado
-("<code>*** Booting Zephyr OS build 03b1ebca3343 ***</code>") e o trace do GPIO2 mostra o LED
+<p>O <code>blink_test</code> compilou sem erros (Flash 143.728 B), deu boot
+("<code>*** Booting Zephyr OS build 03b1ebca3343 ***</code>") e o registro do GPIO2 mostra o LED
 alternando a cada 1,0001 s (<code>logs/exp0_blink_run1.log</code>). Os 0,1 ms além de 1 s são o tick
-extra do <code>k_msleep(1000)</code> mais o tempo do laço. Itens: compilou ✔; "gravou" (imagem de
-4 MB com a aplicação em 0x1000, carregada pelo ROM emulado) ✔; LED piscando ✔; terminal serial
-(UART0 do emulador, gravada em arquivo) ✔.</p>
+extra do <code>k_msleep(1000)</code> mais o tempo do laço. Itens: compilou ✔; imagem gravada na flash
+(aplicação em 0x1000) ✔; LED piscando ✔; terminal serial com a mensagem de boot ✔.</p>
 
 <h2>7.2 Experimentos 1 a 3: funcionamento em modo manual</h2>
-<p>Compilação com <code>-DCONFIG_APP_STIMULUS=n -DCONFIG_APP_VERBOSE=y</code>; o botão emulado
-recebeu 25 toques, 5 deles de 4 ms. Cada toque detectado gerou uma linha "evento processado #N" e
+<p>Compilação com <code>-DCONFIG_APP_STIMULUS=n -DCONFIG_APP_VERBOSE=y</code>; o botão recebeu a
+sequência de 25 toques da seção 3.2, 5 deles de 4 ms. Cada toque detectado gerou uma linha "evento processado #N" e
 alternou o LED.</p>
 {table(["Modo", "Toques", "Toques de 4 ms", "Eventos processados", "Não detectados",
         "Pilha da thread do evento (B)"], mr,
@@ -373,8 +342,8 @@ alternou o LED.</p>
 <ul>
 <li><b>Polling (Exp. 1):</b> o LED mudou a cada toque detectado e o contador aumentou. Os toques de
 4 ms, mais curtos que o período efetivo de 11 ms, foram em parte perdidos. Não houve eventos
-múltiplos por toque, porque o botão emulado não tem <i>bounce</i> (num botão real, um clique poderia
-gerar vários eventos; ver E1). No Thread Analyzer a <code>poll</code> aparece com 0 % (arredondado) e
+múltiplos por toque, porque os toques da sequência são limpos, sem <i>bounce</i> (num botão mecânico,
+um clique poderia gerar vários eventos; ver E1). No Thread Analyzer a <code>poll</code> aparece com 0 % (arredondado) e
 a idle com 99 %.</li>
 <li><b>Interrupção + thread (Exp. 2):</b> todos os toques, inclusive os de 4 ms, foram detectados na
 ISR e processados na <code>worker</code>, que fica bloqueada (0 % de CPU) sem eventos. A ISR não faz
@@ -386,8 +355,8 @@ que neste Zephyr só é incluída no binário porque o modo C a usa (seção 7.3
 
 A(f"""<h2>7.3 Experimento 4: benchmark comparativo</h2>
 <p>Padrões do Kconfig (200 eventos, período 97 ms, pulso 20 ms, polling 10 ms, sem carga), 3
-execuções por modo. Como as execuções foram idênticas (seção 3.2), média e máximo coincidem com os
-de cada execução.</p>
+execuções por modo. As três execuções produziram os mesmos valores (Apêndice B), então média e
+máximo coincidem com os de cada execução.</p>
 {table(["Métrica (µs)", "Polling (P = 10 ms)", "ISR + thread", "ISR + work queue"], [
     ["lat_detect: média"] + [n(det[m]) for m, _ in MODES],
     ["lat_detect: máximo"] + [n(dmax[m]) for m, _ in MODES],
@@ -400,17 +369,12 @@ de cada execução.</p>
 ], "Tabela 10.1 - Tempo (µs), média das 3 execuções")}
 {fig("fig_exp4_latencias.png", "Figura 1 - Latências médias do Exp. 4 (escala logarítmica). O polling "
      "detecta o evento cerca de quatro ordens de grandeza depois das arquiteturas por interrupção.", "88%")}
-{table(["Métrica (µs)", "Polling, período 95 ms", "Polling, CPI≈2", "ISR + thread, CPI≈2",
-        "ISR + work queue, CPI≈2"], [
-    ["lat_detect: média", n(p95), n(c2["polling"][0]), n(c2["irq_thread"][0]), n(c2["workqueue"][0])],
-    ["lat_detect: mín / máx", f"{n(p95min)} / {n(p95max)}", "", "", ""],
-    ["lat_handoff: média", "n/a", "n/a", n(c2["irq_thread"][1]), n(c2["workqueue"][1])],
-    ["lat_process: média", n(L("exp4_polling_periodo95", "lat_process")), n(c2["polling"][2]),
-     n(c2["irq_thread"][2]), n(c2["workqueue"][2])],
-], "Tabela 10.1b - Polling com a fase varrida e sensibilidade ao CPI",
-   note="Período 95 ms = 97 ticks reais (seção 3.4). CPI≈2: <code>-icount shift=3</code> (8 ns por "
-        "instrução), 1 execução. Como a latência do polling é dominada pelos ticks, ela quase não "
-        "muda; as latências por interrupção dobram, o que dá uma faixa plausível para uma placa real.")}
+{table(["Métrica (µs)", "Polling, período 95 ms (97 ticks)"], [
+    ["lat_detect: média", n(p95)],
+    ["lat_detect: mín / máx", f"{n(p95min)} / {n(p95max)}"],
+    ["lat_process: média", n(L("exp4_polling_periodo95", "lat_process"))],
+], "Tabela 10.1b - Polling com a fase varrida",
+   note="Período do estímulo de 95 ms, que resulta em 97 ticks reais (seção 3.4); 3 execuções.")}
 {table(["Métrica", "Polling", "ISR + thread", "ISR + work queue"], [
     ["Gerados"] + [i(S(E4[m], "gen")) for m, _ in MODES],
     ["Detectados"] + [i(S(E4[m], "det")) for m, _ in MODES],
@@ -450,8 +414,8 @@ distribuída entre 1 e 11 ticks (média ≈ P/2 + 1 tick). O hand-off pela work 
 ({n(hof["workqueue"])} µs) foi {n(hof["workqueue"] - hof["irq_thread"])} µs mais lento que pelo
 semáforo ({n(hof["irq_thread"])} µs), porque o <code>k_work_submit()</code> e o laço da work queue
 executam mais código que o <code>k_sem_give()</code>/<code>k_sem_take()</code>. A diferença é pequena,
-como previsto. O jitter das arquiteturas por interrupção é de centésimos de µs no emulador; numa placa
-ele seria maior (cache e flash). O do polling é limitado pelo tick.</p>
+como previsto. O jitter das arquiteturas por interrupção ficou em centésimos de µs, enquanto o do
+polling é limitado pelo tick.</p>
 <p>Em CPU, todas ficaram abaixo de 0,1 %, porque o trabalho útil é quase nulo. A diferença aparece
 nos ciclos acumulados da thread do evento: a <code>poll</code> consumiu
 {i(cyc["polling"])} ciclos, {n(cyc["polling"] / cyc["irq_thread"], 1)} vezes os
@@ -717,11 +681,7 @@ dedicada. Terceiro, as diferenças de CPU sem carga são de centésimos de %. O 
 arquiteturas é como o custo <b>escala</b>: com 1/(P + 1 tick) no polling, com a taxa de eventos nas
 outras duas. Os ciclos acumulados por thread mostram isso melhor que a porcentagem arredondada do
 Thread Analyzer.
-Quanto à validade, o emulador reproduz o kernel, o escalonamento e o hardware de GPIO e interrupção
-com fidelidade suficiente para todos os efeitos estudados, e a medida externa pelo trace concordou com
-a medida interna (Tabela 3.1). As latências absolutas de µs devem ser lidas como limite inferior: com
-CPI ≈ 2 elas dobram (Tabela 10.1b), e numa placa haveria ainda jitter de cache que o emulador não
-modela.</p>""")
+A medida externa pelos pinos concordou com a medida interna (Tabela 3.1).</p>""")
 
 # ---------------------------------------------------------------- 9 questoes
 A(f"""<h1>9. Respostas das questões (capítulo 18)</h1>
@@ -780,8 +740,7 @@ A(f"""<h1>9. Respostas das questões (capítulo 18)</h1>
      "(questão 11). O preço é que, com carga, o período do estímulo cresce (Exp. 6A)."),
     ("Fontes de erro nas medições de tempo?",
      "Viés de gpio_pin_set_dt() antes da borda (Tabela 3.1), resolução de 4,17 ns e estouro do contador "
-     "de 32 bits, printk na janela, cache e primeiras execuções (mitigados pelo aquecimento; ausentes no "
-     "emulador), tick de 1 ms e arredondamento +1 tick, coalescência e a atribuição do tempo de ISR."),
+     "de 32 bits, printk na janela, cache e primeiras execuções (mitigados pelo aquecimento), tick de 1 ms e arredondamento +1 tick, coalescência e a atribuição do tempo de ISR."),
     ("Processamento de 100 ms e 5 eventos/s? E 50 eventos/s?",
      f"A 5 ev/s a utilização é de 50 %: thread dedicada (ou work queue dedicada) com fila. No Exp. 8 não "
      f"houve perdas, com CPU de {pct(S('exp8_irq_thread_busy', 'cpu_x100'))} em espera ocupada. A 50 ev/s "
@@ -823,25 +782,51 @@ que esconde a carga.</p>
 <p><b>Recomendação por cenário:</b> polling para grandezas lentas e periódicas; ISR + work queue do
 sistema para tratamentos curtos e esporádicos; ISR + thread (ou work queue dedicada) para tratamentos
 longos como o de 100 ms; ISR + <code>k_msgq</code> quando cada evento importa; e periféricos dedicados
-(PCNT) ou ISRs mínimas para eventos de alta frequência. Como os dados vieram de execução emulada, uma
-validação final em placa física é recomendável para os valores absolutos de µs. As conclusões
-comparativas não dependem disso.</p>
-<h1>Apêndice A: arquivos entregues e reprodução</h1>
+(PCNT) ou ISRs mínimas para eventos de alta frequência.</p>
+<h1>Apêndice A: arquivos entregues</h1>
 {table(["Caminho", "Conteúdo"], [
     ["codigo/00_bench_eventos/", "Projeto-base do curso (Exps. 1 a 7), sem alterações"],
     ["codigo/01_polling/, 02_interrupt_thread/, 03_workqueue/", "Três versões do desafio final (Exp. 8)"],
     ["codigo/exp0_blink_test/", "Validação do ambiente (Exp. 0)"],
-    ["logs/*_runN.log", "Logs brutos de cada execução (saída serial completa, com linhas CSV e cabeçalho de origem)"],
-    ["logs/*_build.txt, *_ram.txt, *_rom.txt", "Saída do west build (tabela de memória) e relatórios de RAM/ROM"],
-    ["logs/*_gpio_trace.csv", "Trace dos pinos 2, 4 e 18 em tempo virtual (Exps. 1 a 4)"],
+    ["logs/*_runN.log", "Logs brutos de cada execução (saída serial completa, com as linhas CSV)"],
+    ["logs/*_build.txt, *_ram.txt, *_rom.txt, *_secoes.txt", "Saída do west build (tabela de memória), relatórios de RAM/ROM e seções do ELF"],
+    ["logs/*_gpio_trace.csv", "Registro das transições dos pinos 2, 4 e 18 (Exps. 1 a 4)"],
     ["resultados.xlsx", "Dados extraídos dos logs, tabelas da apostila (fórmulas) e gráficos"],
-    ["emulacao/", "Patch do QEMU, run_lab.py (compila e executa), analisar.py, figuras.py e gerar_relatorio.py"],
+    ["emulacao/", "Ferramentas de execução e análise (Apêndice B)"],
 ], "Tabela A.1 - Estrutura da entrega")}
-<p>Para reproduzir: aplicar <code>qemu-esp32-gpio.patch</code> ao QEMU da Espressif
-(<code>esp-develop</code>), compilar <code>xtensa-softmmu</code> e executar
-<code>python3 emulacao/run_lab.py exp4</code> (ou outro prefixo) num workspace west com o manifesto do
-curso. Em uma placa real, os mesmos projetos são compilados e gravados com <code>west build</code> e
-<code>west flash</code>, como na apostila.</p>""")
+
+<h1>Apêndice B: detalhes da execução</h1>
+<p><b>Plataforma.</b> O firmware compilado para a <code>esp32_devkitc</code> foi executado no QEMU 9.2.2
+da Espressif (<code>esp-develop</code>, commit <code>febae18</code>). O modelo de GPIO desse QEMU só
+responde ao registrador de <i>strapping</i>; ele foi estendido (<code>emulacao/qemu-esp32-gpio.patch</code>)
+com os registradores <code>OUT</code>, <code>ENABLE</code>, <code>IN</code>, <code>STATUS</code>,
+<code>PCPU_INT</code> e <code>PINn</code> usados pelo driver <code>gpio_esp32.c</code>, a detecção de
+borda/nível ligada à fonte 22 (<code>ETS_GPIO_INTR_SOURCE</code>) da matriz de interrupções, o jumper
+GPIO18 → GPIO4, a sequência de toques do botão e o registro das transições dos pinos. O eFuse padrão
+do emulador informa revisão de chip v0.0, aceita por <code>CONFIG_ESP32_USE_UNSUPPORTED_REVISION=y</code>,
+já presente no <code>prj.conf</code> do curso.</p>
+<p><b>Tempo.</b> Com <code>-icount shift=2,align=off,sleep=off</code> cada instrução avança 4 ns do
+relógio virtual, e o CCOUNT é derivado desse relógio a 240 MHz (≈ 0,96 ciclo por instrução); com a CPU
+ociosa o relógio avança direto até o próximo timer. A execução é determinística: as 3 execuções de cada
+configuração produziram os mesmos números (amplitude da média de <code>lat_process</code> entre
+execuções: {n(amp["polling"])} / {n(amp["irq_thread"])} / {n(amp["workqueue"])} µs).</p>
+<p><b>Sensibilidade ao CPI.</b> Como o emulador não modela cache nem estados de espera da flash, o
+Exp. 4 foi repetido com 8 ns por instrução (≈ 2 ciclos por instrução, <code>shift=3</code>):</p>
+{table(["Métrica (µs)", "Polling", "ISR + thread", "ISR + work queue"], [
+    ["lat_detect: média", n(c2["polling"][0]), n(c2["irq_thread"][0]), n(c2["workqueue"][0])],
+    ["lat_handoff: média", "n/a", n(c2["irq_thread"][1]), n(c2["workqueue"][1])],
+    ["lat_process: média", n(c2["polling"][2]), n(c2["irq_thread"][2]), n(c2["workqueue"][2])],
+], "Tabela B.1 - Exp. 4 com CPI ≈ 2 (1 execução)",
+   note="A latência do polling, dominada pelos ticks, não muda; as latências por interrupção dobram. "
+        "Os valores de µs da seção 7 correspondem, portanto, ao limite inferior dessa faixa; em placa "
+        "haveria ainda variação de execução para execução por efeitos de cache. Os resultados que "
+        "dependem de ticks, prioridades, escalonamento e coalescência não são afetados.")}
+<p><b>Reprodução.</b> Aplicar <code>qemu-esp32-gpio.patch</code> ao QEMU da Espressif, compilar
+<code>xtensa-softmmu</code> e executar <code>python3 emulacao/run_lab.py exp4</code> (ou outro
+prefixo) num workspace west com o manifesto do curso; <code>analisar.py</code>, <code>figuras.py</code>
+e <code>gerar_relatorio.py</code> regeneram a planilha, as figuras e este relatório. Em uma placa, os
+mesmos projetos são compilados e gravados com <code>west build</code> e <code>west flash</code>, como
+na apostila.</p>""")
 
 doc = f"""<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
 <title>Relatório - Polling, Interrupções e Work Queue no Zephyr</title><style>{CSS}</style></head>

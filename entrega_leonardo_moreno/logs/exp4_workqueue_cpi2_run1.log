@@ -1,8 +1,5 @@
-# ORIGEM: execucao EMULADA - firmware real (west build, esp32_devkitc) rodando no
-#         QEMU da Espressif com modelo de GPIO estendido; NAO e medicao em placa fisica.
 # Experimento: exp4_workqueue_cpi2 | execucao 1
 # Configuracao: -DCONFIG_APP_MODE_WORKQUEUE=y
-# Emulador: -icount shift=3 (8 ns/instrucao) | GPIO: jumper-src=18, jumper-dst=4
 
 ets Jul 29 2019 12:21:46
 

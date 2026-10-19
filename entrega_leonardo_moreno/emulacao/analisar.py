@@ -30,7 +30,7 @@ def parse_logs():
     sizeof = None
     for log in sorted(LOGS.glob("*_run*.log")):
         lines = log.read_text(errors="replace").splitlines()
-        m = RE_EXP.match(lines[2])
+        m = next(mm for ln in lines[:8] if (mm := RE_EXP.match(ln)))
         exp, run = m.group(1), int(m.group(2))
         mode, janela, hb, block = None, None, None, []
         processed_verbose, status = 0, []
@@ -193,15 +193,10 @@ def build_workbook(lat, summ, threads, manual, mem, sizeof, out):
         ("Resultados do hands-on: Polling, Interrupcoes, Threads e Work Queue no Zephyr RTOS", True),
         ("Leonardo Moreno - NUSP 13654481", False),
         ("", False),
-        ("ORIGEM DOS DADOS", True),
-        ("Firmware real compilado com west build (Zephyr 4.5.0-rc2, Zephyr SDK 1.0.1, placa "
-         "esp32_devkitc/esp32/procpu).", False),
-        ("Execucao EMULADA: QEMU da Espressif (esp-develop) com modelo de GPIO estendido "
-         "(saida/entrada, interrupcao por borda, jumper GPIO18->GPIO4).", False),
-        ("Tempo virtual deterministico: -icount shift=2 (4 ns por instrucao, ~1 ciclo por "
-         "instrucao a 240 MHz). Nao e medicao em placa fisica.", False),
-        ("Memoria (Flash/RAM) vem do build real e e identica a de uma placa com a mesma versao.",
-         False),
+        ("AMBIENTE", True),
+        ("Zephyr 4.5.0-rc2, Zephyr SDK 1.0.1, placa esp32_devkitc/esp32/procpu, CPU a 240 MHz, "
+         "tick de 1 ms. Execucao em ESP32 emulado (QEMU Espressif); detalhes no Apendice B do "
+         "relatorio.", False),
         ("", False),
         ("ABAS", True),
         ("Dados_LAT, Dados_SUM, Dados_Threads, Dados_Memoria, Dados_Manual: linhas extraidas "

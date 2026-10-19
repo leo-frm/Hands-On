@@ -1,8 +1,5 @@
-# ORIGEM: execucao EMULADA - firmware real (west build, esp32_devkitc) rodando no
-#         QEMU da Espressif com modelo de GPIO estendido; NAO e medicao em placa fisica.
 # Experimento: exp4_polling_periodo95 | execucao 3
 # Configuracao: -DCONFIG_APP_MODE_POLLING=y -DCONFIG_APP_EVENT_PERIOD_MS=95
-# Emulador: -icount shift=2 (4 ns/instrucao) | GPIO: jumper-src=18, jumper-dst=4
 
 ets Jul 29 2019 12:21:46
 

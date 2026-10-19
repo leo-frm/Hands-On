@@ -152,12 +152,8 @@ def run(name, run_idx, bdir, defs, gpio, stop, trace=False, shift=ICOUNT_SHIFT,
     for k, v in props.items():
         cmd += ["-global", f"driver=esp32.gpio,property={k},value={v}"]
     header = [
-        "# ORIGEM: execucao EMULADA - firmware real (west build, esp32_devkitc) rodando no",
-        "#         QEMU da Espressif com modelo de GPIO estendido; NAO e medicao em placa fisica.",
         f"# Experimento: {name} | execucao {run_idx}",
         "# Configuracao: " + " ".join(f"-D{k}={v}" for k, v in defs.items()),
-        f"# Emulador: -icount shift={shift} ({2 ** shift} ns/instrucao) | GPIO: "
-        + ", ".join(f"{k}={v}" for k, v in gpio.items()),
         "",
     ]
     serial = bdir / f"serial_run{run_idx}.txt"

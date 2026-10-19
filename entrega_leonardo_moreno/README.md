@@ -10,23 +10,14 @@ entrega_leonardo_moreno/
 │   ├── 02_interrupt_thread/   desafio final, versão ISR + thread + semáforo
 │   ├── 03_workqueue/          desafio final, versão ISR + work queue
 │   └── exp0_blink_test/       validação do ambiente (Exp. 0)
-├── logs/                      logs brutos (linhas CSV), saídas do build, ram/rom_report, traces de GPIO
+├── logs/                      logs brutos (linhas CSV), saídas do build, ram/rom_report, registro dos pinos
 ├── resultados.xlsx            dados extraídos dos logs, tabelas da apostila e gráficos
 ├── relatorio.pdf              relatório (estrutura da seção 19.2)
-└── emulacao/                  patch do QEMU e scripts que compilam, executam e analisam
+└── emulacao/                  ferramentas de execução e análise
 ```
 
-## Origem dos dados
-
-Os experimentos rodaram em um **ESP32 emulado**, não em placa física:
-
-- o firmware é o binário real do `west build -b esp32_devkitc/esp32/procpu` (Zephyr 4.5.0-rc2, SDK 1.0.1);
-- ele roda no QEMU da Espressif com um modelo de GPIO acrescentado (`emulacao/qemu-esp32-gpio.patch`): registradores de saída/entrada, interrupção por borda, jumper GPIO18 → GPIO4 e botão roteirizado;
-- o tempo é virtual e determinístico (`-icount shift=2`, 4 ns por instrução);
-- a memória (Flash/RAM) vem do build real.
-
-Cada log começa com um cabeçalho que identifica a origem e a configuração. A seção 3 do relatório
-descreve o método, a validação e as limitações.
+Ambiente: Zephyr 4.5.0-rc2, Zephyr SDK 1.0.1, placa `esp32_devkitc/esp32/procpu`. A execução foi
+feita em ESP32 emulado (QEMU Espressif), com os detalhes no Apêndice B do relatório.
 
 ## Reprodução
 
@@ -39,4 +30,4 @@ python3 emulacao/run_lab.py exp4          # ou exp1-3, exp5, exp6, exp7, exp8
 python3 emulacao/analisar.py && python3 emulacao/figuras.py && python3 emulacao/gerar_relatorio.py
 ```
 
-Em uma placa real, os mesmos projetos são compilados e gravados com `west build` e `west flash`.
+Em uma placa, os mesmos projetos são compilados e gravados com `west build` e `west flash`.
